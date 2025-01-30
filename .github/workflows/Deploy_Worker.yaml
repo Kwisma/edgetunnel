@@ -1,0 +1,63 @@
+name: Deploy Worker 
+
+on:
+  workflow_run:
+    workflows: [Upstream Sync]
+    types: [completed]
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Wrangler
+        run: |
+          npm install -g wrangler
+          mv 明文源码.js worker.js
+      - name: Deploy Worker for ${{ github.ref_name }} 
+        run: |
+          wrangler deploy ./worker.js --minify --name=square-snowflake-e53e --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"zijian dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:${{ secrets.TOKEN }} URL:${{ secrets.URL }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} MIKURU
+        run: |
+          wrangler deploy ./worker.js --minify --name=weathered-sky-75a1 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"miku dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:${{ secrets.TOKEN }} URL:${{ secrets.URL }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MIKURU }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MIKURU }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} MESA
+        run: |
+          wrangler deploy ./worker.js --minify --name=green-sky-e6d9 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"mesa dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:${{ secrets.TOKEN }} URL:${{ secrets.URL }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MESA }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MESA }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} MYTO
+        run: |
+          wrangler deploy ./worker.js --minify --name=super-queen-7364 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"myto dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:${{ secrets.TOKEN }} URL:${{ secrets.URL }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MYTO }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MYTO }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} SORRY
+        run: |
+          wrangler deploy ./worker.js --minify --name=tight-base-d6f3 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"sorry dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:${{ secrets.TOKEN }} URL:${{ secrets.URL }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_SORRY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_SORRY }}
