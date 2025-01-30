@@ -1453,7 +1453,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
 			################################################################<br>
 			${cmad}
 			`;
-		return "Hollow Water!";
+		return "Hello World!";
 	} else {
 		if (typeof fetch != 'function') {
 			return 'Error: fetch is not available in this environment.';
