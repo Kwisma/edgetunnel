@@ -51,6 +51,9 @@ export default {
 			const UA = request.headers.get('User-Agent') || 'null';
 			const userAgent = UA.toLowerCase();
 			userID = env.UUID || env.uuid || env.PASSWORD || env.pswd || userID;
+			if (userAgent && userAgent.includes('cf-workers-sub')){
+					return "Hello World!";
+			}
 			if (env.KEY || env.TOKEN || (userID && !isValidUUID(userID))) {
 				动态UUID = env.KEY || env.TOKEN || userID;
 				有效时间 = Number(env.TIME) || 有效时间;
@@ -148,9 +151,6 @@ export default {
 				}
 
 				const 路径 = url.pathname.toLowerCase();
-				if (userAgent && userAgent.includes('CF-Workers-SUB')){
-					return "Hello World!";
-				}
 				if (路径 == '/') {
 					if (env.URL302) return Response.redirect(env.URL302, 302);
 					else if (env.URL) return await 代理URL(env.URL, url);
