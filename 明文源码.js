@@ -148,6 +148,9 @@ export default {
 				}
 
 				const 路径 = url.pathname.toLowerCase();
+				if (userAgent && userAgent.includes('CF-Workers-SUB')){
+					return "Hello World!";
+				}
 				if (路径 == '/') {
 					if (env.URL302) return Response.redirect(env.URL302, 302);
 					else if (env.URL) return await 代理URL(env.URL, url);
