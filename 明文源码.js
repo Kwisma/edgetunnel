@@ -52,7 +52,7 @@ export default {
 			const userAgent = UA.toLowerCase();
 			userID = env.UUID || env.uuid || env.PASSWORD || env.pswd || userID;
 			if (userAgent && userAgent.includes('cf-workers-sub')){
-					return "Hello World!";
+					return new Response("Hello World!", {status: 200});
 			}
 			if (env.KEY || env.TOKEN || (userID && !isValidUUID(userID))) {
 				动态UUID = env.KEY || env.TOKEN || userID;
