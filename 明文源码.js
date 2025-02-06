@@ -253,6 +253,60 @@ export default {
 	},
 };
 
+async function imgapi() {
+  const apiUrl = 'https://api.lolicon.app/setu/v2';
+  const response = await fetch(apiUrl);
+  const data = await response.json();
+  
+  // 处理 API 返回的数据
+  const img = data?.data[0]?.urls?.original || 'https://moe.jitsu.top/img';
+
+  // 构造 HTML 响应
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Kristi 订阅</title>
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+          }
+          body { 
+            font-family: Tahoma, Verdana, Arial, sans-serif; 
+            background: url('${img}') no-repeat center center fixed;
+            background-size: cover;
+            color: #000; /* 默认字体颜色 */
+            transition: color 0.3s, background-color 0.3s;
+          }
+          .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8); /* 让内容清晰可见 */
+            padding: 20px;
+            border-radius: 10px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="content">
+          <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
+          <p><span style="color: #00FF00;">冀 ICP备2222000777号</span> | 版权所有 &copy; 2025</p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  return html
+}
+
 async function 维列斯OverWSHandler(request) {
 
 	// @ts-ignore
@@ -1456,7 +1510,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
 			################################################################<br>
 			${cmad}
 			`;
-		return "Hello World!";
+		return await imgapi();
 	} else {
 		if (typeof fetch != 'function') {
 			return 'Error: fetch is not available in this environment.';
