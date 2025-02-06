@@ -293,13 +293,65 @@ async function imgapi() {
             padding: 20px;
             border-radius: 10px;
           }
+          .icp-info {
+            position: fixed;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            padding: 5px 0;
+            z-index: 999;
+          }
+          /*以下为评论系统专用*/
+          /*适配大小契合度*/
+          .newValine {
+            width: min(96%, 940px);
+            flex-direction: column;
+            row-gap: var(--hope-space-2);
+            border-radius: var(--hope-radii-xl);
+            padding: var(--hope-space-2);
+            box-shadow: var(--hope-shadows-lg);
+          }
+          /*评论区 - 白天模式透明度*/
+          .hope-ui-light .newValine {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+          }
+          /*评论区 - 夜间模式透明度*/
+          .hope-ui-dark .newValine {
+            background-color:rgb(0 0 0 / 50%) !important;
+          }
         </style>
+        <!--音乐播放器所用的文件-->
+        <!-- require APlayer -->
+        <link rel="stylesheet" href="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css">
+        <script src="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+        <!-- require MetingJS -->
+        <script src="https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
+        <!--评论系统使用的js-->
+        <!-- Valine -->
+        <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
       </head>
       <body>
         <div class="content">
           <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
-          <p><span style="color: #00FF00;">冀 ICP备2222000777号</span> | 版权所有 &copy; 2025</p>
+          <!--评论系统-->
+          <center><div class="newValine" id="vcomments"></div></center>
+          <!--音乐播放器-->
+          <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist" id="2568697963"></meting-js>
         </div>
+        <div class="icp-info"><span style="color: #00FF00;">冀 ICP备2222000777号</span> | 版权所有 &copy; 2025</div>
+        <!--评论系统使用的js-->
+        <script>
+		  new Valine({
+		    visitor: true,
+			el: '#vcomments',
+			avatar: 'wavatar',
+			appId: 'fkZtrzozsMGG552jFzqNDUTD-gzGzoHsz',
+			appKey: 'BZ7ocur5nH3DuliMJlzLfSUW',
+			MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
+			placeholder: "有什么问题欢迎评论区留言~么么哒"
+		  }) 
+		</script>
       </body>
     </html>
   `;
