@@ -253,6 +253,15 @@ export default {
 	},
 };
 
+function arrayBufferToBase64(buffer) {
+  let binary = ''
+  const bytes = new Uint8Array(buffer)
+  const len = bytes.byteLength
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i])
+  }
+  return btoa(binary)
+}
 async function imgapi() {
   const apiUrl = 'https://api.lolicon.app/setu/v2';
   const response = await fetch(apiUrl);
@@ -260,6 +269,12 @@ async function imgapi() {
   
   // 处理 API 返回的数据
   const img = data?.data[0]?.urls?.original || 'https://moe.jitsu.top/img';
+  const imageResponse = await fetch(imgurl)
+  // 将图片内容转换为 ArrayBuffer
+  const arrayBuffer = await imageResponse.arrayBuffer()
+  // 将 ArrayBuffer 转换为 Base64
+  const base64 = arrayBufferToBase64(arrayBuffer)
+  const base64Src = `data:image/png;base64,${base64}`
 
   // 构造 HTML 响应
   const html = `
@@ -278,7 +293,7 @@ async function imgapi() {
           }
           body { 
             font-family: Tahoma, Verdana, Arial, sans-serif; 
-            background: url('${img}') no-repeat center center fixed;
+            background: url('${base64Src}') no-repeat center center fixed;
             background-size: cover;
             color: #000; /* 默认字体颜色 */
             transition: color 0.3s, background-color 0.3s;
