@@ -320,6 +320,18 @@ async function imgapi() {
           .hope-ui-dark .newValine {
             background-color:rgb(0 0 0 / 50%) !important;
           }
+          /*输入栏里面跳舞的小人背景图*/
+          .vedit {
+            background-image:url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
+            background-size:contain;
+            background-repeat:no-repeat;
+            background-position:right bottom;
+            transition:all 0.25s ease-in-out 0s;
+          }
+          textarea#comment-textarea:focus {
+            background-position-y:120px;
+            transition:all 0.25s ease-in-out 0s;
+          }
         </style>
         <!--音乐播放器所用的文件-->
         <!-- require APlayer -->
@@ -349,8 +361,15 @@ async function imgapi() {
 			appId: 'fkZtrzozsMGG552jFzqNDUTD-gzGzoHsz',
 			appKey: 'BZ7ocur5nH3DuliMJlzLfSUW',
 			MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
-			placeholder: "有什么问题欢迎评论区留言~么么哒"
-		  }) 
+			placeholder: "有什么问题欢迎评论区交流~么么哒"
+		  });
+		  setTimeout(() => {
+		    const valineTextarea = document.querySelector("#vcomments textarea");
+		    if (valineTextarea) {
+		      valineTextarea.id = "comment-textarea";
+		      valineTextarea.classList.add("vedit");
+		    }
+		  }, 1000);
 		</script>
       </body>
     </html>
