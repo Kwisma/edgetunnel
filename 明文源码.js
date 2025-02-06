@@ -268,7 +268,7 @@ async function imgapi() {
   const data = await response.json();
   
   // 处理 API 返回的数据
-  const img = data?.data[0]?.urls?.original || 'https://moe.jitsu.top/img';
+  const imgurl = data?.data[0]?.urls?.original || 'https://moe.jitsu.top/img';
   const imageResponse = await fetch(imgurl)
   // 将图片内容转换为 ArrayBuffer
   const arrayBuffer = await imageResponse.arrayBuffer()
