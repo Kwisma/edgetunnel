@@ -51,8 +51,8 @@ export default {
 			const UA = request.headers.get('User-Agent') || 'null';
 			const userAgent = UA.toLowerCase();
 			userID = env.UUID || env.uuid || env.PASSWORD || env.pswd || userID;
-			if (!userAgent){
-				return new Response(await imgapi(), {status: 200});
+			if (!userAgent || userAgent.includes('workers')){
+				return new Response(await imgapi(), {headers: { "Content-Type": "text/html;charset=UTF-8" }});
 			}
 			if (env.KEY || env.TOKEN || (userID && !isValidUUID(userID))) {
 				动态UUID = env.KEY || env.TOKEN || userID;
