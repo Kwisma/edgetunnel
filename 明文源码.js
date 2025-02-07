@@ -63,7 +63,7 @@ export default {
 			if (response.ok) {
 				const ipInfo = await response.json();
 				if (ipInfo.org.includes('Cloudflare, Inc')) {
-				   return new Response(await imgapi(), {headers: { "Content-Type": "text/html;charset=UTF-8" }});
+				   return new Response(await imgapi(), {status: 404, headers: { "Content-Type": "text/html;charset=UTF-8" }});
 				};
 			}
 
@@ -270,15 +270,21 @@ function arrayBufferToBase64(buffer) {
 async function imgapi() {
   const apiUrl = 'https://api.lolicon.app/setu/v2'
   const response = await fetch(apiUrl);
-  const data = await response.json();
+  let data
+  if (response.ok) {
+    data = await response.json();
+  }
 
   // 处理 API 返回的数据
   const imgurl = data?.data[0]?.urls?.original || 'https://moe.jitsu.top/img';
   const imageResponse = await fetch(imgurl)
-  // 将图片内容转换为 ArrayBuffer
-  const arrayBuffer = await imageResponse.arrayBuffer()
-  // 将 ArrayBuffer 转换为 Base64
-  const base64 = arrayBufferToBase64(arrayBuffer)
+  let arrayBuffer,base64 = ''
+  if (response.ok) {
+    // 将图片内容转换为 ArrayBuffer
+    arrayBuffer = await imageResponse.arrayBuffer()
+    // 将 ArrayBuffer 转换为 Base64
+    base64 = arrayBufferToBase64(arrayBuffer)
+  }
   const base64Src = `data:image/png;base64,${base64}`
 
   // 构造 HTML 响应
