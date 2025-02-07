@@ -51,13 +51,7 @@ export default {
 			const UA = request.headers.get('User-Agent') || 'null';
 			const userAgent = UA.toLowerCase();
 			userID = env.UUID || env.uuid || env.PASSWORD || env.pswd || userID;
-			const response = await fetch(`http://ip-api.com/json/${request.headers.get('CF-Connecting-IP')}?lang=zh-CN`);
-			if (response.ok) {
-				const ipInfo = await response.json();
-				if (ipInfo.org.includes('Cloudflare')){
-				   return new Response(await imgapi(), {headers: { "Content-Type": "text/html;charset=UTF-8" }});
-				};
-			}
+			
 			if (env.KEY || env.TOKEN || (userID && !isValidUUID(userID))) {
 				动态UUID = env.KEY || env.TOKEN || userID;
 				有效时间 = Number(env.TIME) || 有效时间;
