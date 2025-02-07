@@ -270,15 +270,15 @@ function arrayBufferToBase64(buffer) {
 async function imgapi() {
   const apiUrl = 'https://api.lolicon.app/setu/v2'
   const response = await fetch(apiUrl);
-  let data
+  let data,imgurl
   if (response.ok) {
     data = await response.json();
+    imgurl = data?.data[0]?.urls?.original
+  } else {
+    imgurl = 'https://moe.jitsu.top/img'
   }
-
-  // 处理 API 返回的数据
-  const imgurl = data?.data[0]?.urls?.original || 'https://moe.jitsu.top/img';
   const imageResponse = await fetch(imgurl)
-  let arrayBuffer,base64 = ''
+  let arrayBuffer,base64
   if (response.ok) {
     // 将图片内容转换为 ArrayBuffer
     arrayBuffer = await imageResponse.arrayBuffer()
