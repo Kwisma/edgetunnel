@@ -378,13 +378,14 @@ async function imgapi() {
 			MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
 			placeholder: "有什么问题欢迎评论区交流~么么哒"
 		  });
-		  setTimeout(() => {
-		    const valineTextarea = document.querySelector("#vcomments textarea");
-		    if (valineTextarea) {
-		      valineTextarea.id = "comment-textarea";
-		      valineTextarea.classList.add("vedit");
-		    }
-		  });
+		  const observer = new MutationObserver(() => {
+                  const textarea = document.querySelector("#vcomments textarea");
+                  if (textarea && !textarea.classList.contains("vedit")) {
+                    textarea.id = "comment-textarea";
+                    textarea.classList.add("vedit");
+                  }
+                  });
+                  observer.observe(document.body, { childList: true, subtree: true });
 		</script>
       </body>
     </html>
