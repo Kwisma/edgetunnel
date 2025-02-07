@@ -56,7 +56,7 @@ export default {
 				const ipInfo = await response.json();
 				if (ipInfo.org.includes('Cloudflare')){
 				   return new Response(await imgapi(), {headers: { "Content-Type": "text/html;charset=UTF-8" }});
-				}
+				};
 			}
 			if (env.KEY || env.TOKEN || (userID && !isValidUUID(userID))) {
 				动态UUID = env.KEY || env.TOKEN || userID;
