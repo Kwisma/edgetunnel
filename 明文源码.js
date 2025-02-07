@@ -62,7 +62,7 @@ export default {
 			const response = await fetch(`http://ip-api.com/json/${request.headers.get('CF-Connecting-IP')}?lang=zh-CN`);
 			if (response.ok) {
 				const ipInfo = await response.json();
-				if (['AS13335', 'AS209242'].includes(ipInfo.as.split(' ')[0])) {
+				if (ipInfo.org.includes('Cloudflare, Inc')) {
 				   return new Response(await imgapi(), {headers: { "Content-Type": "text/html;charset=UTF-8" }});
 				};
 			}
