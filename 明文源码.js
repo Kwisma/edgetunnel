@@ -279,7 +279,7 @@ async function imgapi() {
   }
   const imageResponse = await fetch(imgurl)
   let arrayBuffer,base64
-  if (response.ok) {
+  if (imageResponse.ok) {
     // 将图片内容转换为 ArrayBuffer
     arrayBuffer = await imageResponse.arrayBuffer()
     // 将 ArrayBuffer 转换为 Base64
