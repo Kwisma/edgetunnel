@@ -366,7 +366,7 @@ async function imgapi() {
           <!--音乐播放器-->
           <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist" id="2568697963"></meting-js>
         </div>
-        <div class="icp-info"><span style="color: #00FF00;">冀 ICP备2222000777号</span> | 版权所有 &copy; 2025</div>
+        <div class="icp-info"><span href="https://beian.miit.gov.cn/" target="_blank" style="color: #00FF00;">冀 ICP备2222000777号</span> | 版权所有 &copy; 2025</div>
         <!--评论系统使用的js-->
         <script>
 		  new Valine({
@@ -384,7 +384,7 @@ async function imgapi() {
 		      valineTextarea.id = "comment-textarea";
 		      valineTextarea.classList.add("vedit");
 		    }
-		  }, 1000);
+		  });
 		</script>
       </body>
     </html>
