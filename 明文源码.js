@@ -258,15 +258,16 @@ function arrayBufferToBase64(buffer) {
   const bytes = new Uint8Array(buffer)
   const len = bytes.byteLength
   for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i])
+      binary += String.fromCharCode(bytes[i])
   }
-  return btoa(binary)
+  return btoa(binary);
 }
+
 async function imgapi() {
-  const apiUrl = 'https://api.lolicon.app/setu/v2';
+  const apiUrl = 'https://api.lolicon.app/setu/v2'
   const response = await fetch(apiUrl);
   const data = await response.json();
-  
+
   // 处理 API 返回的数据
   const imgurl = data?.data[0]?.urls?.original || 'https://moe.jitsu.top/img';
   const imageResponse = await fetch(imgurl)
@@ -277,121 +278,139 @@ async function imgapi() {
   const base64Src = `data:image/png;base64,${base64}`
 
   // 构造 HTML 响应
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>Kristi 订阅</title>
-        <style>
-          html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-          }
-          body { 
-            font-family: Tahoma, Verdana, Arial, sans-serif; 
-            background: url('${base64Src}') no-repeat center center fixed;
-            background-size: cover;
-            color: #000; /* 默认字体颜色 */
-            transition: color 0.3s, background-color 0.3s;
-          }
-          .content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            background: rgba(255, 255, 255, 0.8); /* 让内容清晰可见 */
-            padding: 20px;
-            border-radius: 10px;
-          }
-          .icp-info {
-            position: fixed;
-            bottom: 50px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            padding: 5px 0;
-            z-index: 999;
-          }
-          /*以下为评论系统专用*/
-          /*适配大小契合度*/
-          .newValine {
-            width: min(96%, 940px);
-            flex-direction: column;
-            row-gap: var(--hope-space-2);
-            border-radius: var(--hope-radii-xl);
-            padding: var(--hope-space-2);
-            box-shadow: var(--hope-shadows-lg);
-          }
-          /*评论区 - 白天模式透明度*/
-          .hope-ui-light .newValine {
-            background-color: rgba(255, 255, 255, 0.5) !important;
-          }
-          /*评论区 - 夜间模式透明度*/
-          .hope-ui-dark .newValine {
-            background-color:rgb(0 0 0 / 50%) !important;
-          }
-          /*输入栏里面跳舞的小人背景图*/
-          .vedit {
-            background-image:url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
-            background-size:contain;
-            background-repeat:no-repeat;
-            background-position:right bottom;
-            transition:all 0.25s ease-in-out 0s;
-          }
-          textarea#comment-textarea:focus {
-            background-position-y:120px;
-            transition:all 0.25s ease-in-out 0s;
-          }
-        </style>
-        <!--音乐播放器所用的文件-->
-        <!-- require APlayer -->
-        <link rel="stylesheet" href="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css">
-        <script src="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
-        <!-- require MetingJS -->
-        <script src="https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
-        <!--评论系统使用的js-->
-        <!-- Valine -->
-        <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
-      </head>
-      <body>
-        <div class="content">
-          <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
-          <!--评论系统-->
-          <center><div class="newValine" id="vcomments"></div></center>
-          <!--音乐播放器-->
-          <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist" id="2568697963"></meting-js>
-        </div>
-        <div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank">冀 ICP备2222000777号</a> | 版权所有 &copy; 2025</div>
-        <!--评论系统使用的js-->
-        <script>
-		  new Valine({
-		    visitor: true,
-			el: '#vcomments',
-			avatar: 'wavatar',
-			appId: 'fkZtrzozsMGG552jFzqNDUTD-gzGzoHsz',
-			appKey: 'BZ7ocur5nH3DuliMJlzLfSUW',
-			MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
-			placeholder: "有什么问题欢迎评论区交流~么么哒"
-		  });
-		  const observer = new MutationObserver(() => {
-                  const textarea = document.querySelector("#vcomments textarea");
-                  if (textarea && !textarea.classList.contains("vedit")) {
-                    textarea.id = "comment-textarea";
-                    textarea.classList.add("vedit");
-                  }
-                  });
-                  observer.observe(document.body, { childList: true, subtree: true });
-		</script>
-      </body>
-    </html>
-  `;
+  return `
+<!DOCTYPE html>
+<html lang="zh-CN">
 
-  return html
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kristi 订阅</title>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+        background: url('${base64Src}') no-repeat center center fixed;
+        background-size: cover;
+        color: #000;
+        /* 默认字体颜色 */
+        transition: color 0.3s, background-color 0.3s;
+    }
+
+    .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        background: rgba(255, 255, 255, 0.8);
+        /* 让内容清晰可见 */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .icp-info {
+        position: fixed;
+        bottom: 50px;
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        padding: 5px 0;
+        z-index: 999;
+    }
+
+    /*以下为评论系统专用*/
+    /*适配大小契合度*/
+    .newValine {
+        text-align: center;
+        width: min(96%, 940px);
+        flex-direction: column;
+        row-gap: var(--hope-space-2);
+        border-radius: var(--hope-radii-xl);
+        padding: var(--hope-space-2);
+        box-shadow: var(--hope-shadows-lg);
+    }
+
+    /*评论区 - 白天模式透明度*/
+    .hope-ui-light .newValine {
+        background-color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    /*评论区 - 夜间模式透明度*/
+    .hope-ui-dark .newValine {
+        background-color: rgb(0 0 0 / 50%) !important;
+    }
+
+    /*输入栏里面跳舞的小人背景图*/
+    .vedit {
+        background-image: url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        transition: all 0.25s ease-in-out 0s;
+    }
+
+    /*输入栏里面跳舞的小人背景图*/
+    textarea#comment-textarea:focus {
+        background-position-y: 120px;
+        transition: all 0.25s ease-in-out 0s;
+    }
+</style>
+<!--音乐播放器所用的文件-->
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
+<!--评论系统使用的js-->
+<!-- Valine -->
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+<body>
+<div class="content">
+    <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
+    <!--评论系统-->
+    <div class="newValine" id="vcomments"></div>
+    <!--音乐播放器-->
+    <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
+        id="2568697963"></meting-js>
+</div>
+<div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">冀 ICP备2222000777号</a> |
+    版权所有 &copy; 2025
+</div>
+<script>
+    /*评论系统使用的js*/
+    new Valine({
+        visitor: true,
+        el: '#vcomments',
+        avatar: 'wavatar',
+        appId: 'fkZtrzozsMGG552jFzqNDUTD-gzGzoHsz',
+        appKey: 'BZ7ocur5nH3DuliMJlzLfSUW',
+        MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
+        placeholder: "有什么问题欢迎评论区交流~么么哒"
+    });
+    /*输入栏里面跳舞的小人背景图*/
+    const observer = new MutationObserver(() => {
+        const textarea = document.querySelector("#vcomments textarea");
+        if (textarea && !textarea.classList.contains("vedit")) {
+            textarea.id = "comment-textarea";
+            textarea.classList.add("vedit");
+        }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+</script>
+</body>
+
+</html>`
 }
 
 async function 维列斯OverWSHandler(request) {
