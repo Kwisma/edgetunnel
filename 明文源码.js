@@ -346,7 +346,8 @@ async function imgapi() {
     /*适配大小契合度*/
     .newValine {
         text-align: center;
-        width: min(96%, 940px);
+        width: 100%;
+	height: 100%;
         flex-direction: column;
         row-gap: var(--hope-space-2);
         border-radius: var(--hope-radii-xl);
