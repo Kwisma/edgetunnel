@@ -328,6 +328,7 @@ async function imgapi() {
         max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
         box-sizing: border-box;  /* 包括内边距在内的总宽度 */
         bottom: 50px;  /* 距离底部 */
+	overflow: hidden;  /* 确保内容不会超出 */
     }
 
     .icp-info {
@@ -371,6 +372,9 @@ async function imgapi() {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right bottom;
+	max-width: 100%; /* 确保宽度适应容器 */
+        box-sizing: border-box; /* 包括内边距在内的总宽度 */
+        padding-right: 40px; /* 给右侧背景图留出空间 */
         transition: all 0.25s ease-in-out 0s;
     }
 
