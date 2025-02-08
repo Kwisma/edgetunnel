@@ -324,12 +324,13 @@ async function imgapi() {
         background: rgba(255, 255, 255, 0.8);
         /* 让内容清晰可见 */
         padding: 20px;
+	border-radius: 10px;
     }
 
     @media (max-width: 768px) {
       .content {
         width: 90%;
-	bottom: 100px;
+	margin-bottom: 50px;
       }
     }
 
