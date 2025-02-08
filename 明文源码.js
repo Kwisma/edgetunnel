@@ -328,9 +328,9 @@ async function imgapi() {
 	overflow: hidden;  /* 确保内容不会超出 */
         width: 90%;  /* 设置宽度，保证内容不超出屏幕 */
         max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
-	height: auto;
+	height: 90%;
         max-height: 500px;
-	
+	box-sizing: border-box;  /* 包括内边距在内的总宽度和高度 */
     }
 
     .icp-info {
@@ -354,20 +354,8 @@ async function imgapi() {
         padding: 16px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
-        max-height: 100vh; /* 限制最大高度为视口高度的 80% */
+        height: 100%; /* 视口高 */
         overflow-y: auto; /* 内容超出时启用滚动条 */
-        max-width: 100%;  /* 防止评论区超出父容器 */
-    }
-    .newValine::-webkit-scrollbar {
-        width: 8px; /* 设置滚动条宽度 */
-    }
-    .newValine::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.5); /* 滚动条颜色 */
-        border-radius: 10px;
-    }
-
-    .newValine::-webkit-scrollbar-track {
-        background-color: rgba(0, 0, 0, 0.1); /* 滚动条轨道颜色 */
     }
 
     /*评论区 - 白天模式透明度*/
