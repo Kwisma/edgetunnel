@@ -328,14 +328,14 @@ async function imgapi() {
 	overflow: hidden;  /* 确保内容不会超出 */
         width: 90%;  /* 设置宽度，保证内容不超出屏幕 */
         max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
-	height: 90%;
+	min-height: 90%;
         max-height: 500px;
 	box-sizing: border-box;  /* 包括内边距在内的总宽度和高度 */
     }
 
     .icp-info {
-        position: fixed;
-        bottom: 50px;
+        position: absolute;
+        bottom: 20px;
         width: 100%;
         text-align: center;
         font-size: 14px;
@@ -355,6 +355,7 @@ async function imgapi() {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
         height: 100%; /* 视口高 */
+	max-height: 500px
         overflow-y: auto; /* 内容超出时启用滚动条 */
     }
 
