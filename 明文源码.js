@@ -354,9 +354,13 @@ async function imgapi() {
         padding: 16px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
-        height: 100%; /* 视口高 */
+        min-height: 100%; /* 视口高 */
 	max-height: 500px
         overflow-y: auto; /* 内容超出时启用滚动条 */
+	position: static;
+        z-index: 1;
+        pointer-events: auto;
+        box-sizing: border-box; /* 包括内边距和边框 */
     }
 
     /*评论区 - 白天模式透明度*/
