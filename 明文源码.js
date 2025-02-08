@@ -361,6 +361,18 @@ async function imgapi() {
         flex-direction: column;
         justify-content: flex-start;  /* 使内容从顶部开始排列 */
     }
+    .newValine::-webkit-scrollbar {
+    width: 8px; /* 设置滚动条宽度 */
+}
+
+.newValine::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* 滚动条颜色 */
+    border-radius: 10px;
+}
+
+.newValine::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* 滚动条轨道颜色 */
+}
 
     /*评论区 - 白天模式透明度*/
     .hope-ui-light .newValine {
