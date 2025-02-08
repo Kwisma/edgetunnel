@@ -324,10 +324,10 @@ async function imgapi() {
         background: rgba(255, 255, 255, 0.8);
 	padding: 20px;  /* 内边距 */
         border-radius: 10px;  /* 圆角边框 */
-        width: 90%;  /* 设置宽度，保证内容不超出屏幕 */
+        width: 100%;  /* 设置宽度，保证内容不超出屏幕 */
         max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
         box-sizing: border-box;  /* 包括内边距在内的总宽度 */
-        bottom: 50px;  /* 距离底部 */
+        bottom: 20px;  /* 距离底部 */
 	overflow: hidden;  /* 确保内容不会超出 */
     }
 
@@ -354,6 +354,7 @@ async function imgapi() {
 	/* 防止上下溢出屏幕 */
         max-height: 80vh; /* 限制最大高度为视口高度的 80% */
         overflow-y: auto; /* 内容超出时启用滚动条 */
+        max-width: 100%;  /* 防止评论区超出父容器 */
     }
 
     /*评论区 - 白天模式透明度*/
