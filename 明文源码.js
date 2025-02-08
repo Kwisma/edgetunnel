@@ -324,9 +324,6 @@ async function imgapi() {
         background: rgba(255, 255, 255, 0.8);
 	padding: 20px;  /* 内边距 */
         border-radius: 10px;  /* 圆角边框 */
-        width: 100%;  /* 设置宽度，保证内容不超出屏幕 */
-        max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
-        box-sizing: border-box;  /* 包括内边距在内的总宽度 */
         bottom: 20px;  /* 距离底部 */
 	overflow: hidden;  /* 确保内容不会超出 */
     }
