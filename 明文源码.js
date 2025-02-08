@@ -330,6 +330,7 @@ async function imgapi() {
         max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
 	height: 90%;
         max-height: 500px;
+	box-sizing: border-box;  /* 包括内边距在内的总宽度和高度 */
     }
 
     .icp-info {
