@@ -325,6 +325,7 @@ async function imgapi() {
         /* 让内容清晰可见 */
         padding: 20px;
         border-radius: 10px;
+	margin-bottom: 50px;
     }
 
     @media (max-width: 768px) {
