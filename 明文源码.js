@@ -326,6 +326,10 @@ async function imgapi() {
         border-radius: 10px;  /* 圆角边框 */
         bottom: 20px;  /* 距离底部 */
 	overflow: hidden;  /* 确保内容不会超出 */
+        width: 90%;  /* 设置宽度，保证内容不超出屏幕 */
+        max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
+	height: 90%;
+        max-height: 500px;
     }
 
     .icp-info {
