@@ -328,8 +328,10 @@ async function imgapi() {
 	max-width: 500px;
         height: 90vh; /* 设置相对屏幕的高度 */
         max-height: 500px;
-        overflow-y: auto; /* 确保内容可以滚动 */
+	overflow: hidden; /* 禁止滚动 */
         box-sizing: border-box;
+	display: flex;
+        flex-direction: column;
     }
 
     .icp-info {
@@ -345,7 +347,9 @@ async function imgapi() {
     /*以下为评论系统专用*/
     /*适配大小契合度*/
     .newValine {
-        text-align: center;
+        flex: 1; /* 自动填充可用空间 */
+	overflow-y: auto; /* 允许滚动 */
+	text-align: center;
         width: 100%;
         flex-direction: column;
         row-gap: 16px;
@@ -353,12 +357,7 @@ async function imgapi() {
         padding: 16px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
-        height: 100%; /* 视口高 */
-	max-height: 100%;
-        overflow-y: auto; /* 内容超出时启用滚动条 */
-	position: relative;
         box-sizing: border-box;
-	padding-bottom: 60px; /* 预留播放器的空间 */
     }
 
     /*评论区 - 白天模式透明度*/
@@ -388,13 +387,6 @@ async function imgapi() {
         background-position-y: 120px;
         transition: all 0.25s ease-in-out 0s;
     }
-    .meting-container {
-        position: relative;
-        width: 100%;
-        height: 60px; /* 防止播放器紧贴评论区 */
-        z-index: 10;
-	background: transparent;
-    }
 </style>
 <!--音乐播放器所用的文件-->
 <!-- require APlayer -->
@@ -413,9 +405,7 @@ async function imgapi() {
     <!--评论系统-->
     <div class="newValine" id="vcomments"></div>
     <!--音乐播放器-->
-    <div class="meting-container">
-      <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist" id="2568697963"></meting-js>
-    </div>
+    <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist" id="2568697963"></meting-js>
 </div>
 <div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">冀 ICP备2222000777号</a> |
     版权所有 &copy; 2025
