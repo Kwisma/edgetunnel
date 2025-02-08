@@ -348,16 +348,18 @@ async function imgapi() {
     .newValine {
         text-align: center;
         width: 100%;
-	height: 100%;
         flex-direction: column;
-        row-gap: var(--hope-space-2);
-        border-radius: var(--hope-radii-xl);
-        padding: var(--hope-space-2);
-        box-shadow: var(--hope-shadows-lg);
+        row-gap: 16px;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
         max-height: 80vh; /* 限制最大高度为视口高度的 80% */
         overflow-y: auto; /* 内容超出时启用滚动条 */
         max-width: 100%;  /* 防止评论区超出父容器 */
+	display: flex;
+        flex-direction: column;
+        justify-content: flex-start;  /* 使内容从顶部开始排列 */
     }
 
     /*评论区 - 白天模式透明度*/
