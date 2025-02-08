@@ -308,7 +308,6 @@ async function imgapi() {
 
     body {
         font-family: Tahoma, Verdana, Arial, sans-serif;
-        background: url('${base64Src}') no-repeat center center fixed;
         background-size: cover;
         color: #000;
         /* 默认字体颜色 */
@@ -327,6 +326,13 @@ async function imgapi() {
         border-radius: 10px;
     }
 
+    @media (max-width: 768px) {
+      .content {
+        width: 90%;
+        padding: 10px;
+      }
+    }
+
     .icp-info {
         position: fixed;
         bottom: 50px;
@@ -341,7 +347,7 @@ async function imgapi() {
     /*适配大小契合度*/
     .newValine {
         text-align: center;
-        width: min(96%, 940px);
+        width: 96%;
         flex-direction: column;
         row-gap: var(--hope-space-2);
         border-radius: var(--hope-radii-xl);
@@ -417,6 +423,8 @@ async function imgapi() {
         }
     });
     observer.observe(document.body, { childList: true, subtree: true });
+    /*全局背景*/
+    document.body.style.backgroundImage = `url('${base64Src}')`;
 </script>
 </body>
 
