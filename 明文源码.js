@@ -328,9 +328,9 @@ async function imgapi() {
 	overflow: hidden;  /* 确保内容不会超出 */
         width: 90%;  /* 设置宽度，保证内容不超出屏幕 */
         max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
-	height: 90%;
+	height: auto;
         max-height: 500px;
-	box-sizing: border-box;  /* 包括内边距在内的总宽度和高度 */
+	
     }
 
     .icp-info {
