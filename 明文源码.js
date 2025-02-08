@@ -354,10 +354,11 @@ async function imgapi() {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
         height: 100%; /* 视口高 */
-	max-height: 500px;
+	max-height: 100%;
         overflow-y: auto; /* 内容超出时启用滚动条 */
 	position: relative;
         box-sizing: border-box;
+	padding-bottom: 60px; /* 预留播放器的空间 */
     }
 
     /*评论区 - 白天模式透明度*/
@@ -386,6 +387,12 @@ async function imgapi() {
     textarea#comment-textarea:focus {
         background-position-y: 120px;
         transition: all 0.25s ease-in-out 0s;
+    }
+    meting-js {
+        position: relative;
+        display: block;
+        margin-top: 10px; /* 防止播放器紧贴评论区 */
+        z-index: 10;
     }
 </style>
 <!--音乐播放器所用的文件-->
