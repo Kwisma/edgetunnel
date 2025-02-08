@@ -358,8 +358,6 @@ async function imgapi() {
         overflow-y: auto; /* 内容超出时启用滚动条 */
         max-width: 100%;  /* 防止评论区超出父容器 */
 	display: flex;
-        overflow-y: scroll;
-        justify-content: flex-start;  /* 使内容从顶部开始排列 */
     }
     .newValine::-webkit-scrollbar {
         width: 8px; /* 设置滚动条宽度 */
