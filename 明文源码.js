@@ -354,10 +354,9 @@ async function imgapi() {
         padding: 16px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
-        max-height: 80vh; /* 限制最大高度为视口高度的 80% */
+        max-height: 100vh; /* 限制最大高度为视口高度的 80% */
         overflow-y: auto; /* 内容超出时启用滚动条 */
         max-width: 100%;  /* 防止评论区超出父容器 */
-	display: flex;
     }
     .newValine::-webkit-scrollbar {
         width: 8px; /* 设置滚动条宽度 */
