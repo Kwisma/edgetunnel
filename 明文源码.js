@@ -308,6 +308,7 @@ async function imgapi() {
 
     body {
         font-family: Tahoma, Verdana, Arial, sans-serif;
+	background: url('${base64Src}') no-repeat center center fixed;
         background-size: cover;
         color: #000;
         /* 默认字体颜色 */
@@ -423,8 +424,6 @@ async function imgapi() {
         }
     });
     observer.observe(document.body, { childList: true, subtree: true });
-    /*全局背景*/
-    document.body.style.backgroundImage = `url('${base64Src}')`;
 </script>
 </body>
 
