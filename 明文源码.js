@@ -324,13 +324,12 @@ async function imgapi() {
         background: rgba(255, 255, 255, 0.8);
 	padding: 20px;  /* 内边距 */
         border-radius: 10px;  /* 圆角边框 */
-        bottom: 20px;  /* 距离底部 */
-	overflow: hidden;  /* 确保内容不会超出 */
-        width: 90%;  /* 设置宽度，保证内容不超出屏幕 */
-        max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
-	min-height: 90%;
+        width: 90%;
+	max-width: 500px;
+        height: 90vh; /* 设置相对屏幕的高度 */
         max-height: 500px;
-	box-sizing: border-box;  /* 包括内边距在内的总宽度和高度 */
+        overflow-y: auto; /* 确保内容可以滚动 */
+        box-sizing: border-box;
     }
 
     .icp-info {
@@ -354,13 +353,11 @@ async function imgapi() {
         padding: 16px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	/* 防止上下溢出屏幕 */
-        min-height: 100%; /* 视口高 */
-	max-height: 500px
+        height: 100%; /* 视口高 */
+	max-height: 500px;
         overflow-y: auto; /* 内容超出时启用滚动条 */
-	position: static;
-        z-index: 1;
-        pointer-events: auto;
-        box-sizing: border-box; /* 包括内边距和边框 */
+	position: relative;
+        box-sizing: border-box;
     }
 
     /*评论区 - 白天模式透明度*/
