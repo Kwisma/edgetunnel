@@ -63,8 +63,8 @@ export default {
 			if (response.ok) {
 				const ipInfo = await response.json();
 				if (ipInfo.org.includes('Cloudflare, Inc')) {
-				   return new Response(await imgapi(), {status: 404, headers: { "Content-Type": "text/html;charset=UTF-8" }});
-				};
+				  throw new Error(``);
+				}
 			}
 
 			if (!userID) {
