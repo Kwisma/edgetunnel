@@ -316,22 +316,18 @@ async function imgapi() {
     }
 
     .content {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
         background: rgba(255, 255, 255, 0.8);
-        /* 让内容清晰可见 */
-        padding: 20px;
-	border-radius: 10px;
-    }
-
-    @media (max-width: 768px) {
-      .content {
-        width: 90%;
-	margin-bottom: 50px;
-      }
+	padding: 20px;  /* 内边距 */
+        border-radius: 10px;  /* 圆角边框 */
+        width: 90%;  /* 设置宽度，保证内容不超出屏幕 */
+        max-width: 500px;  /* 设置最大宽度，避免在大屏幕上过于宽 */
+        box-sizing: border-box;  /* 包括内边距在内的总宽度 */
+        bottom: 50px;  /* 距离底部 */
     }
 
     .icp-info {
