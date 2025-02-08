@@ -354,6 +354,9 @@ async function imgapi() {
         border-radius: var(--hope-radii-xl);
         padding: var(--hope-space-2);
         box-shadow: var(--hope-shadows-lg);
+	/* 防止上下溢出屏幕 */
+        max-height: 80vh; /* 限制最大高度为视口高度的 80% */
+        overflow-y: auto; /* 内容超出时启用滚动条 */
     }
 
     /*评论区 - 白天模式透明度*/
