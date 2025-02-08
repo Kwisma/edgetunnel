@@ -388,11 +388,12 @@ async function imgapi() {
         background-position-y: 120px;
         transition: all 0.25s ease-in-out 0s;
     }
-    meting-js {
+    .meting-container {
         position: relative;
-        display: block;
-        margin-top: 10px; /* 防止播放器紧贴评论区 */
+        width: 100%;
+        height: 60px; /* 防止播放器紧贴评论区 */
         z-index: 10;
+	background: transparent;
     }
 </style>
 <!--音乐播放器所用的文件-->
@@ -412,8 +413,9 @@ async function imgapi() {
     <!--评论系统-->
     <div class="newValine" id="vcomments"></div>
     <!--音乐播放器-->
-    <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
-        id="2568697963"></meting-js>
+    <div class="meting-container">
+      <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist" id="2568697963"></meting-js>
+    </div>
 </div>
 <div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">冀 ICP备2222000777号</a> |
     版权所有 &copy; 2025
