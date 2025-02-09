@@ -385,10 +385,10 @@ async function imgapi() {
     </style>
     <!--音乐播放器所用的文件-->
     <!-- require APlayer -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <link rel="stylesheet" href="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
     <!-- require MetingJS -->
-    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+    <script src="https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
     <!--评论系统使用的js-->
     <!-- Valine -->
     <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
