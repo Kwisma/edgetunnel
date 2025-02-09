@@ -258,179 +258,175 @@ export default {
 };
 
 function arrayBufferToBase64(buffer) {
-  let binary = ''
-  const bytes = new Uint8Array(buffer)
-  const len = bytes.byteLength
-  for (let i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i])
-  }
-  return btoa(binary);
+    let binary = ''
+    const bytes = new Uint8Array(buffer)
+    const len = bytes.byteLength
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i])
+    }
+    return btoa(binary);
 }
 
 async function imgapi() {
-  const apiUrl = 'https://api.lolicon.app/setu/v2'
-  const response = await fetch(apiUrl);
-  let data,imgurl
-  if (response.ok) {
-    data = await response.json();
-    imgurl = data?.data[0]?.urls?.original
-  } else {
-    imgurl = 'https://moe.jitsu.top/img'
-  }
-  const imageResponse = await fetch(imgurl)
-  let arrayBuffer,base64
-  if (imageResponse.ok) {
-    // 将图片内容转换为 ArrayBuffer
-    arrayBuffer = await imageResponse.arrayBuffer()
-    // 将 ArrayBuffer 转换为 Base64
-    base64 = arrayBufferToBase64(arrayBuffer)
-  }
-  const base64Src = `data:image/png;base64,${base64}`
-
-  // 构造 HTML 响应
-  return `
+    const apiUrl = 'https://api.lolicon.app/setu/v2'
+    let img = 'https://moe.jitsu.top/img'
+    const response = await fetch(apiUrl);
+    if (response.ok) {
+        const data = await response.json();
+        img = data?.data[0]?.urls?.original
+    }
+    // 构造 HTML 响应
+    return `
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kristi 订阅</title>
-<style>
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kristi 订阅</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+            background: url('${img}') no-repeat center center fixed;
+            background-size: cover;
+            color: #000;
+            /* 默认字体颜色 */
+            transition: color 0.3s, background-color 0.3s;
+        }
 
-    body {
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-	background: url('${base64Src}') no-repeat center center fixed;
-        background-size: cover;
-        color: #000;
-        /* 默认字体颜色 */
-        transition: color 0.3s, background-color 0.3s;
-    }
+        .content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            /* 内边距 */
+            border-radius: 10px;
+            /* 圆角边框 */
+            width: 90%;
+            max-width: 500px;
+            height: 90vh;
+            /* 设置相对屏幕的高度 */
+            max-height: 500px;
+            overflow: hidden;
+            /* 禁止滚动 */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .content {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        background: rgba(255, 255, 255, 0.8);
-	padding: 20px;  /* 内边距 */
-        border-radius: 10px;  /* 圆角边框 */
-        width: 90%;
-	max-width: 500px;
-        height: 90vh; /* 设置相对屏幕的高度 */
-        max-height: 500px;
-	overflow: hidden; /* 禁止滚动 */
-        box-sizing: border-box;
-	display: flex;
-        flex-direction: column;
-    }
+        .icp-info {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            padding: 5px 0;
+            z-index: 999;
+        }
 
-    .icp-info {
-        position: absolute;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        font-size: 14px;
-        padding: 5px 0;
-        z-index: 999;
-    }
+        /*以下为评论系统专用*/
+        /*适配大小契合度*/
+        .newValine {
+            flex: 1;
+            /* 自动填充可用空间 */
+            overflow-y: auto;
+            /* 允许滚动 */
+            text-align: center;
+            width: 100%;
+            flex-direction: column;
+            row-gap: 16px;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* 防止上下溢出屏幕 */
+            box-sizing: border-box;
+            margin-bottom: 50px;
+        }
 
-    /*以下为评论系统专用*/
-    /*适配大小契合度*/
-    .newValine {
-        flex: 1; /* 自动填充可用空间 */
-	overflow-y: auto; /* 允许滚动 */
-	text-align: center;
-        width: 100%;
-        flex-direction: column;
-        row-gap: 16px;
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	/* 防止上下溢出屏幕 */
-        box-sizing: border-box;
-    }
+        /*评论区 - 白天模式透明度*/
+        .hope-ui-light .newValine {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+        }
 
-    /*评论区 - 白天模式透明度*/
-    .hope-ui-light .newValine {
-        background-color: rgba(255, 255, 255, 0.5) !important;
-    }
+        /*评论区 - 夜间模式透明度*/
+        .hope-ui-dark .newValine {
+            background-color: rgb(0 0 0 / 50%) !important;
+        }
 
-    /*评论区 - 夜间模式透明度*/
-    .hope-ui-dark .newValine {
-        background-color: rgb(0 0 0 / 50%) !important;
-    }
+        /*输入栏里面跳舞的小人背景图*/
+        .vedit {
+            background-image: url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right bottom;
+            max-width: 100%;
+            /* 确保宽度适应容器 */
+            box-sizing: border-box;
+            /* 包括内边距在内的总宽度 */
+            padding-right: 40px;
+            /* 给右侧背景图留出空间 */
+            transition: all 0.25s ease-in-out 0s;
+        }
 
-    /*输入栏里面跳舞的小人背景图*/
-    .vedit {
-        background-image: url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: right bottom;
-	max-width: 100%; /* 确保宽度适应容器 */
-        box-sizing: border-box; /* 包括内边距在内的总宽度 */
-        padding-right: 40px; /* 给右侧背景图留出空间 */
-        transition: all 0.25s ease-in-out 0s;
-    }
-
-    /*输入栏里面跳舞的小人背景图*/
-    textarea#comment-textarea:focus {
-        background-position-y: 120px;
-        transition: all 0.25s ease-in-out 0s;
-    }
-</style>
-<!--音乐播放器所用的文件-->
-<!-- require APlayer -->
-<link rel="stylesheet" href="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css">
-<script src="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<!-- require MetingJS -->
-<script src="https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
-<!--评论系统使用的js-->
-<!-- Valine -->
-<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+        /*输入栏里面跳舞的小人背景图*/
+        textarea#comment-textarea:focus {
+            background-position-y: 120px;
+            transition: all 0.25s ease-in-out 0s;
+        }
+    </style>
+    <!--音乐播放器所用的文件-->
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+    <!--评论系统使用的js-->
+    <!-- Valine -->
+    <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 <body>
-<div class="content">
-    <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
-    <!--评论系统-->
-    <div class="newValine" id="vcomments"></div>
-    <!--音乐播放器-->
-    <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist" id="2568697963"></meting-js>
-</div>
-<div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">冀 ICP备2222000777号</a> |
-    版权所有 &copy; 2025
-</div>
-<script>
-    /*评论系统使用的js*/
-    new Valine({
-        visitor: true,
-        el: '#vcomments',
-        avatar: 'wavatar',
-        appId: 'fkZtrzozsMGG552jFzqNDUTD-gzGzoHsz',
-        appKey: 'BZ7ocur5nH3DuliMJlzLfSUW',
-        MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
-        placeholder: "有什么问题欢迎评论区交流~么么哒"
-    });
-    /*输入栏里面跳舞的小人背景图*/
-    const observer = new MutationObserver(() => {
-        const textarea = document.querySelector("#vcomments textarea");
-        if (textarea && !textarea.classList.contains("vedit")) {
-            textarea.id = "comment-textarea";
-            textarea.classList.add("vedit");
-        }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-</script>
+    <div class="content">
+        <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
+        <!--评论系统-->
+        <div class="newValine" id="vcomments"></div>
+        <!--音乐播放器-->
+        <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
+            id="2568697963"></meting-js>
+    </div>
+    <div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">冀 ICP备2222000777号</a> |
+        版权所有 &copy; 2025
+    </div>
+    <script>
+        /*评论系统使用的js*/
+        new Valine({
+            visitor: true,
+            el: '#vcomments',
+            avatar: 'wavatar',
+            appId: 'fkZtrzozsMGG552jFzqNDUTD-gzGzoHsz',
+            appKey: 'BZ7ocur5nH3DuliMJlzLfSUW',
+            MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
+            placeholder: "有什么问题欢迎评论区交流~么么哒"
+        });
+        /*输入栏里面跳舞的小人背景图*/
+        const observer = new MutationObserver(() => {
+            const textarea = document.querySelector("#vcomments textarea");
+            if (textarea && !textarea.classList.contains("vedit")) {
+                textarea.id = "comment-textarea";
+                textarea.classList.add("vedit");
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    </script>
 </body>
 
 </html>`
