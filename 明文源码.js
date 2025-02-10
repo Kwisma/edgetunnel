@@ -267,7 +267,7 @@ function arrayBufferToBase64(buffer) {
     return btoa(binary);
 }
 
-async function imgapi() {
+async function imgapi(proxyhost = '', hostName = '', uuid = '') {
     const apiUrl = 'https://api.lolicon.app/setu/v2'
     let img = 'https://moe.jitsu.top/img'
     const response = await fetch(apiUrl);
@@ -285,15 +285,15 @@ async function imgapi() {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kristi 订阅</title>
     <style>
-        html,
-        body {
+        * {
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
+        }
+
+        body {
             overflow: hidden;
             font-family: Tahoma, Verdana, Arial, sans-serif;
-            background: url('${img}') no-repeat center center fixed;
+            background: url('https://moe.jitsu.top/img') no-repeat center center fixed;
             background-size: cover;
             color: #000;
             /* 默认字体颜色 */
@@ -313,9 +313,9 @@ async function imgapi() {
             /* 圆角边框 */
             width: 90%;
             max-width: 500px;
-            height: 90vh;
+            height: 90%;
             /* 设置相对屏幕的高度 */
-            max-height: 500px;
+            max-height: 800px;
             overflow: hidden;
             /* 禁止滚动 */
             box-sizing: border-box;
@@ -336,12 +336,16 @@ async function imgapi() {
         /*以下为评论系统专用*/
         /*适配大小契合度*/
         .newValine {
-            flex: 1;
+            flex: none;
             /* 自动填充可用空间 */
             overflow-y: auto;
             /* 允许滚动 */
             text-align: center;
             width: 100%;
+            height: auto;
+            /* 设置最大宽度 */
+            max-height: 300px;
+            /* 设置最大高度 */
             flex-direction: column;
             row-gap: 16px;
             border-radius: 12px;
@@ -349,21 +353,25 @@ async function imgapi() {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             /* 防止上下溢出屏幕 */
             box-sizing: border-box;
-            margin-bottom: 50px;
+        }
+
+        /* 隐藏newValine滚动条 */
+        .newValine::-webkit-scrollbar {
+            display: none;
         }
 
         /*评论区 - 白天模式透明度*/
         .hope-ui-light .newValine {
-            background-color: rgba(255, 255, 255, 0.5) !important;
+            background-color: rgba(255, 255, 255, 0.5);
         }
 
         /*评论区 - 夜间模式透明度*/
         .hope-ui-dark .newValine {
-            background-color: rgb(0 0 0 / 50%) !important;
+            background-color: rgb(0 0 0 / 50%);
         }
 
         /*输入栏里面跳舞的小人背景图*/
-        .vedit {
+        #veditor.veditor.vinput {
             background-image: url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
             background-size: contain;
             background-repeat: no-repeat;
@@ -378,9 +386,78 @@ async function imgapi() {
         }
 
         /*输入栏里面跳舞的小人背景图*/
-        textarea#comment-textarea:focus {
+        textarea#veditor:focus {
             background-position-y: 120px;
             transition: all 0.25s ease-in-out 0s;
+        }
+
+        .vcontent p {
+            color: #000 !important;
+            /* 修改评论内容的字体颜色 */
+        }
+
+        .vheader .vinput {
+            color: saddlebrown !important;
+            /* 修改输入框文字的颜色 */
+        }
+
+        .vheader .vinput::placeholder {
+            color: chartreuse !important;
+            /* 修改占位符文本颜色 */
+        }
+
+        .vsubmit {
+            color: hotpink !important;
+            /* 修改提交按钮的文字颜色 */
+        }
+
+        .veditor {
+            color: slateblue !important;
+            /* 修改评论框字体颜色 */
+            border: 1px solid #ccc;
+            /* 修改边框颜色 */
+        }
+
+        .veditor::placeholder {
+            color: #ff6347 !important;
+            /* 修改占位符文本颜色 */
+        }
+        /* 二维码 */
+        .notice-content {
+            display: none;
+        }
+
+        .copy-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .qrcode-container {
+            margin: 10px;
+        }
+
+        .txthtml-container {
+            flex: none;
+            /* 自动填充可用空间 */
+            overflow-y: auto;
+            /* 允许滚动 */
+            text-align: center;
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* 防止上下溢出屏幕 */
+            box-sizing: border-box;
+
+        }
+
+        /* 虚线 */
+        .divider {
+            width: 100%;
+            border-bottom: 1px dashed #000;
+            margin: 20px 0;
         }
     </style>
     <!--音乐播放器所用的文件-->
@@ -388,15 +465,65 @@ async function imgapi() {
     <link rel="stylesheet" href="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css">
     <script src="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
     <!-- require MetingJS -->
-    <script src="https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
+    <script src="https:///npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
     <!--评论系统使用的js-->
     <!-- Valine -->
     <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@keeex/qrcodejs-kx@1.0.2/qrcode.min.js"></script>
 </head>
 
 <body>
     <div class="content">
         <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
+        <!-- 订阅地址和二维码生成 -->
+        <div class="txthtml-container">
+            <p>Subscribe / sub 订阅地址, 点击链接自动 <strong>复制订阅链接</strong> 并 <strong>生成订阅二维码</strong></p>
+            <p class="divider"></p>
+            <p>自适应订阅地址:</p>
+            <a href="javascript:void(0)"
+                onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?sub','qrcode_0')" class="copy-link">
+                https://${proxyhost}${hostName}/${uuid}
+            </a>
+            <div id="qrcode_0" class="qrcode-container"></div>
+
+            <p>Base64订阅地址:</p>
+            <a href="javascript:void(0)"
+                onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?b64','qrcode_1')" class="copy-link">
+                https://${proxyhost}${hostName}/${uuid}?b64
+            </a>
+            <div id="qrcode_1" class="qrcode-container"></div>
+
+            <p>clash订阅地址:</p>
+            <a href="javascript:void(0)"
+                onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?clash','qrcode_2')" class="copy-link">
+                https://${proxyhost}${hostName}/${uuid}?clash
+            </a>
+            <div id="qrcode_2" class="qrcode-container"></div>
+
+            <p>singbox订阅地址:</p>
+            <a href="javascript:void(0)"
+                onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?sb','qrcode_3')" class="copy-link">
+                https://${proxyhost}${hostName}/${uuid}?sb
+            </a>
+            <div id="qrcode_3" class="qrcode-container"></div>
+
+            <strong><a href="javascript:void(0);" id="noticeToggle" onclick="toggleNotice()">实用订阅技巧∨</a></strong>
+            <div id="noticeContent" class="notice-content">
+                <strong>PassWall</strong> 即可；<br><br>
+                <strong>2.</strong> 如您使用的是 SSR+ 路由插件, 推荐使用 <strong>Base64订阅地址</strong> 进行订阅；<br><br>
+                <strong>3.</strong> 快速切换 <a href='${atob('aHR0cHM6Ly9naXRodWIuY29tL2NtbGl1L1dvcmtlclZsZXNzMnN1Yg==')}'>优选订阅生成器</a>
+                至: sub.google.com, 您可将"?sub=sub.google.com"参数添加到链接末尾, 例如: <br>
+                &nbsp;&nbsp;https://${proxyhost}${hostName}/${uuid}<strong>?sub=sub.google.com</strong><br><br>
+                <strong>4.</strong> 快速更换 PROXYIP
+                至: proxyip.cmliussss.net:443, 您可将"?proxyip=proxyip.cmliussss.net:443"参数添加到链接末尾, 例如: <br>
+                &nbsp;&nbsp;https://${proxyhost}${hostName}/${uuid}<strong>?proxyip=proxyip.cmliussss.net:443</strong><br><br>
+                <strong>5.</strong> 快速更换 SOCKS5
+                至: user:password@127.0.0.1:1080, 您可将"?socks5=user:password@127.0.0.1:1080"参数添加到链接末尾, 例如: <br>
+                &nbsp;&nbsp;https://${proxyhost}${hostName}/${uuid}<strong>?socks5=user:password@127.0.0.1:1080</strong><br><br>
+                <strong>6.</strong> 如需指定多个参数则需要使用'&'做间隔, 例如: <br>
+                &nbsp;&nbsp;https://${proxyhost}${hostName}/${uuid}?sub=sub.google.com<strong>&</strong>proxyip=proxyip.cmliussss.net<br>
+            </div>
+        </div>
         <!--评论系统-->
         <div class="newValine" id="vcomments"></div>
         <!--音乐播放器-->
@@ -415,8 +542,53 @@ async function imgapi() {
             appId: 'fkZtrzozsMGG552jFzqNDUTD-gzGzoHsz',
             appKey: 'BZ7ocur5nH3DuliMJlzLfSUW',
             MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
-            placeholder: "有什么问题欢迎评论区交流~么么哒"
+            placeholder: "有什么问题欢迎评论区交流~么么哒",
         });
+        /*js修改*/
+        document.addEventListener('DOMContentLoaded', function () {
+            // 修改 meting-js 容器大小
+            var metingJsElement = document.querySelector('meting-js');
+            if (metingJsElement) {
+                metingJsElement.style.width = '100%';
+                metingJsElement.style.height = '60px';
+            }
+
+            // 评论系统修改 .vpower.txt-right 元素内容
+            var vpowerElement = document.querySelector('.vpower.txt-right');
+            if (vpowerElement) {
+                vpowerElement.innerHTML = 'Powered By <a href="https://ys.mihoyo.com" target="_blank">元神启动</a><br>v1.5.2';
+            }
+        });
+        function copyToClipboard(text, qrcode) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制到剪贴板');
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+            const qrcodeDiv = document.getElementById(qrcode);
+            qrcodeDiv.innerHTML = '';
+            new QRCode(qrcodeDiv, {
+                text: text,
+                width: 220, // 调整宽度
+                height: 220, // 调整高度
+                colorDark: "#000000", // 二维码颜色
+                colorLight: "#ffffff", // 背景颜色
+                correctLevel: QRCode.CorrectLevel.Q, // 设置纠错级别
+                scale: 1 // 调整像素颗粒度
+            });
+        }
+
+        function toggleNotice() {
+            const noticeContent = document.getElementById('noticeContent');
+            const noticeToggle = document.getElementById('noticeToggle');
+            if (noticeContent.style.display === 'none') {
+                noticeContent.style.display = 'block';
+                noticeToggle.textContent = '实用订阅技巧∧';
+            } else {
+                noticeContent.style.display = 'none';
+                noticeToggle.textContent = '实用订阅技巧∨';
+            }
+        }
     </script>
 </body>
 
@@ -1626,7 +1798,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
 			################################################################<br>
 			${cmad}
 			`;
-		return await imgapi();
+		return await imgapi(proxyhost, hostName, uuid);
 	} else {
 		if (typeof fetch != 'function') {
 			return 'Error: fetch is not available in this environment.';
