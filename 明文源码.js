@@ -311,7 +311,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             border-radius: 10px;
             width: 90%;
             max-width: 500px;
-            height: 90vh;
+            height: 80vh;
             /* 使用视口单位代替百分比 */
             max-height: 800px;
             overflow: hidden;
@@ -333,10 +333,16 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
-
-            /* 优化滚动条 */
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+        }
+	
+	.scroll-container::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+	
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
         }
 
         .txthtml-container {
@@ -612,8 +618,8 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             qrcodeDiv.innerHTML = '';
             new QRCode(qrcodeDiv, {
                 text: text,
-                width: 220, // 调整宽度
-                height: 220, // 调整高度
+                width: 160, // 调整宽度
+                height: 160, // 调整高度
                 colorDark: "#000000", // 二维码颜色
                 colorLight: "#ffffff", // 背景颜色
                 correctLevel: QRCode.CorrectLevel.Q, // 设置纠错级别
