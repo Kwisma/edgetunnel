@@ -417,15 +417,6 @@ async function imgapi() {
             MasterKey: 'BY36YH3sTiCCoG6vJYa16JKt',
             placeholder: "有什么问题欢迎评论区交流~么么哒"
         });
-        /*输入栏里面跳舞的小人背景图*/
-        const observer = new MutationObserver(() => {
-            const textarea = document.querySelector("#vcomments textarea");
-            if (textarea && !textarea.classList.contains("vedit")) {
-                textarea.id = "comment-textarea";
-                textarea.classList.add("vedit");
-            }
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
     </script>
 </body>
 
