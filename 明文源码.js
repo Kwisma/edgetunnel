@@ -293,7 +293,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
         body {
             overflow: hidden;
             font-family: Tahoma, Verdana, Arial, sans-serif;
-            background: url('https://moe.jitsu.top/img') no-repeat center center fixed;
+            background: url('${img}') no-repeat center center fixed;
             background-size: cover;
             color: #000;
             /* 默认字体颜色 */
@@ -308,51 +308,77 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             text-align: center;
             background: rgba(255, 255, 255, 0.8);
             padding: 20px;
-            /* 内边距 */
             border-radius: 10px;
-            /* 圆角边框 */
             width: 90%;
             max-width: 500px;
-            height: 90%;
-            /* 设置相对屏幕的高度 */
+            height: 90vh;
+            /* 使用视口单位代替百分比 */
             max-height: 800px;
             overflow: hidden;
-            /* 禁止滚动 */
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
+            gap: 1px;
+            /* 统一子元素间距 */
         }
 
-        .icp-info {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            padding: 5px 0;
-            z-index: 999;
-        }
-
-        /*以下为评论系统专用*/
-        /*适配大小契合度*/
-        .newValine {
-            flex: none;
-            /* 自动填充可用空间 */
-            overflow-y: auto;
-            /* 允许滚动 */
+        /* 公共容器样式 */
+        .scroll-container {
+            flex: 1;
+            /* 自动填充剩余空间 */
+            overflow: auto;
             text-align: center;
             width: 100%;
-            height: auto;
-            /* 设置最大宽度 */
-            max-height: 300px;
-            /* 设置最大高度 */
-            flex-direction: column;
-            row-gap: 16px;
-            border-radius: 12px;
             padding: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* 防止上下溢出屏幕 */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
+
+            /* 优化滚动条 */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+        }
+
+        .txthtml-container {
+            /* 继承.scroll-container所有样式 */
+            min-height: 150px;
+            /* 设置最小高度 */
+        }
+
+        .newValine {
+            display: flex;
+            /* 启用flex布局 */
+            flex-direction: column;
+            gap: 16px;
+            /* 替代row-gap保持兼容性 */
+            min-height: 200px;
+            /* 设置最小高度 */
+        }
+
+        /* 响应式设计 */
+        @media (max-height: 600px) {
+            .content {
+                padding: 12px;
+                height: 95vh;
+                /* 小屏幕增加可用高度 */
+            }
+
+            .scroll-container {
+                padding: 12px;
+                min-height: auto;
+                /* 自动高度适应 */
+            }
+        }
+
+        /* 滚动条样式兼容 */
+        .scroll-container::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
         }
 
         /* 隐藏newValine滚动条 */
@@ -402,7 +428,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
         }
 
         .vheader .vinput::placeholder {
-            color: chartreuse !important;
+            color: darkmagenta !important;
             /* 修改占位符文本颜色 */
         }
 
@@ -422,6 +448,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             color: #ff6347 !important;
             /* 修改占位符文本颜色 */
         }
+
         /* 二维码 */
         .notice-content {
             display: none;
@@ -444,7 +471,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             /* 允许滚动 */
             text-align: center;
             width: 100%;
-            height: 300px;
+            height: 200px;
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -458,6 +485,27 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             width: 100%;
             border-bottom: 1px dashed #000;
             margin: 20px 0;
+        }
+
+        .muri {
+            text-align: center;
+            width: 100%;
+            height: 50px;
+
+        }
+
+        .icp-info {
+            position: fixed;
+            bottom: 20px;
+            /* 距离底部20px，根据需要调整 */
+            left: 50%;
+            /* 左侧从视口中间开始 */
+            transform: translateX(-50%);
+            /* 水平向左移动自身宽度的一半，实现居中 */
+            bottom: 20px;
+            z-index: 1000;
+            white-space: nowrap;
+            /* 禁止自动换行 */
         }
     </style>
     <!--音乐播放器所用的文件-->
@@ -476,7 +524,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
     <div class="content">
         <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
         <!-- 订阅地址和二维码生成 -->
-        <div class="txthtml-container">
+        <div class="txthtml-container scroll-container">
             <p>Subscribe / sub 订阅地址, 点击链接自动 <strong>复制订阅链接</strong> 并 <strong>生成订阅二维码</strong></p>
             <p class="divider"></p>
             <p>自适应订阅地址:</p>
@@ -525,10 +573,12 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             </div>
         </div>
         <!--评论系统-->
-        <div class="newValine" id="vcomments"></div>
+        <div class="newValine scroll-container" id="vcomments"></div>
         <!--音乐播放器-->
-        <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
-            id="2568697963"></meting-js>
+        <div class="muri">
+            <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
+                id="2568697963"></meting-js>
+        </div>
     </div>
     <div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">冀 ICP备2222000777号</a> |
         版权所有 &copy; 2025
@@ -546,17 +596,10 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
         });
         /*js修改*/
         document.addEventListener('DOMContentLoaded', function () {
-            // 修改 meting-js 容器大小
-            var metingJsElement = document.querySelector('meting-js');
-            if (metingJsElement) {
-                metingJsElement.style.width = '100%';
-                metingJsElement.style.height = '60px';
-            }
-
             // 评论系统修改 .vpower.txt-right 元素内容
             var vpowerElement = document.querySelector('.vpower.txt-right');
             if (vpowerElement) {
-                vpowerElement.innerHTML = 'Powered By <a href="https://ys.mihoyo.com" target="_blank">元神启动</a><br>v1.5.2';
+                vpowerElement.innerHTML = 'Powered By <a href="https://ys.mihoyo.com" target="_blank">原神启动</a><br>v1.5.2';
             }
         });
         function copyToClipboard(text, qrcode) {
