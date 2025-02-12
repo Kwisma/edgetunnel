@@ -363,7 +363,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             flex-direction: column;
             gap: 16px;
             height: min(200px, 30vh);
-            flex-shrink: 0;
+            flex-shrink: inherit;
             overflow: auto;
         }
 
@@ -457,7 +457,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             text-align: center;
             width: 100%;
             height: 50px;
-
+            flex-shrink: 0;
         }
 
         .icp-info {
