@@ -61,7 +61,7 @@ export default {
 			}
 			const clientIP = request.headers.get('CF-Connecting-IP');
 			if (isCloudflareIp(clientIP)) {
-				throw null
+				return new Response('', {status: 400});
 			}
 			if (!userID) {
 				return new Response('请设置你的UUID变量，或尝试重试部署，检查变量是否生效？', {
