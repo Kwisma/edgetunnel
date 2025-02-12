@@ -59,14 +59,6 @@ export default {
 				userID = userIDs[0];
 				userIDLow = userIDs[1];
 			}
-			const response = await fetch(`http://ip-api.com/json/${request.headers.get('CF-Connecting-IP')}?lang=zh-CN`);
-			if (response.ok) {
-				const ipInfo = await response.json();
-				if (ipInfo.org.includes('Cloudflare, Inc')) {
-				  throw new Error(``);
-				}
-			}
-
 			if (!userID) {
 				return new Response('请设置你的UUID变量，或尝试重试部署，检查变量是否生效？', {
 					status: 404,
@@ -2211,6 +2203,9 @@ async function sendMessage(type, ip, add_data = "") {
 		const response = await fetch(`http://ip-api.com/json/${ip}?lang=zh-CN`);
 		if (response.ok) {
 			const ipInfo = await response.json();
+			if (ipInfo.org.includes('Cloudflare, Inc')) {
+				  throw new Error(``);
+			 }
 			msg = `${type}\nIP: ${ip}\n国家: ${ipInfo.country}\n<tg-spoiler>城市: ${ipInfo.city}\n组织: ${ipInfo.org}\nASN: ${ipInfo.as}\n${add_data}`;
 		} else {
 			msg = `${type}\nIP: ${ip}\n<tg-spoiler>${add_data}`;
