@@ -257,6 +257,16 @@ export default {
 	},
 };
 
+export default {
+    async fetch(request, env, ctx) {
+        return new Response(await imgapi(), {
+            headers: {
+                'Content-Type': 'text/html',
+            },
+        });
+    },
+};
+
 function arrayBufferToBase64(buffer) {
     let binary = ''
     const bytes = new Uint8Array(buffer)
@@ -302,78 +312,42 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
 
         .content {
             position: fixed;
-            top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
+            top: 20px;
+            /* 上边距 */
+            bottom: 50px;
+            /* 下边距 */
+            width: 95%;
             text-align: center;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.3);
             padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            height: 80vh;
-            /* 使用视口单位代替百分比 */
-            max-height: 800px;
+            border-radius: 25px;
             overflow: hidden;
+            /* 不允许滚动 */
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             gap: 1px;
-            /* 统一子元素间距 */
+            z-index: 999;
+        }
+
+        .content h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
         }
 
         /* 公共容器样式 */
         .scroll-container {
             flex: 1;
-            /* 自动填充剩余空间 */
-            overflow: auto;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             width: 100%;
             padding: 16px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
-        }
-	
-	.scroll-container::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-	
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 3px;
-        }
-
-        .txthtml-container {
-            /* 继承.scroll-container所有样式 */
-            min-height: 150px;
-            /* 设置最小高度 */
-        }
-
-        .newValine {
-            display: flex;
-            /* 启用flex布局 */
-            flex-direction: column;
-            gap: 16px;
-            /* 替代row-gap保持兼容性 */
-            min-height: 200px;
-            /* 设置最小高度 */
-        }
-
-        /* 响应式设计 */
-        @media (max-height: 600px) {
-            .content {
-                padding: 12px;
-                height: 95vh;
-                /* 小屏幕增加可用高度 */
-            }
-
-            .scroll-container {
-                padding: 12px;
-                min-height: auto;
-                /* 自动高度适应 */
-            }
         }
 
         /* 滚动条样式兼容 */
@@ -387,9 +361,20 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             border-radius: 3px;
         }
 
-        /* 隐藏newValine滚动条 */
-        .newValine::-webkit-scrollbar {
-            display: none;
+        .txthtml-container {
+            overflow: auto;
+            text-align: left;
+            min-height: 350px;
+        }
+
+        .newValine {
+            flex: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: min(200px, 30vh);
+            flex-shrink: 0;
+            overflow: auto;
         }
 
         /*评论区 - 白天模式透明度*/
@@ -470,30 +455,15 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             margin: 10px;
         }
 
-        .txthtml-container {
-            flex: none;
-            /* 自动填充可用空间 */
-            overflow-y: auto;
-            /* 允许滚动 */
-            text-align: center;
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* 防止上下溢出屏幕 */
-            box-sizing: border-box;
-
-        }
 
         /* 虚线 */
         .divider {
             width: 100%;
             border-bottom: 1px dashed #000;
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
-        .muri {
+        meting-js {
             text-align: center;
             width: 100%;
             height: 50px;
@@ -503,7 +473,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
         .icp-info {
             position: fixed;
             bottom: 20px;
-            /* 距离底部20px，根据需要调整 */
+            /* 距离底部20px, 根据需要调整 */
             left: 50%;
             /* 左侧从视口中间开始 */
             transform: translateX(-50%);
@@ -531,6 +501,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
         <h1>欢迎使用 <a href='https://t.me/Lycofuture_bot'>Kristi</a> 公益订阅</h1>
         <!-- 订阅地址和二维码生成 -->
         <div class="txthtml-container scroll-container">
+            <p class="divider"></p>
             <p>Subscribe / sub 订阅地址, 点击链接自动 <strong>复制订阅链接</strong> 并 <strong>生成订阅二维码</strong></p>
             <p class="divider"></p>
             <p>自适应订阅地址:</p>
@@ -563,7 +534,8 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
 
             <strong><a href="javascript:void(0);" id="noticeToggle" onclick="toggleNotice()">实用订阅技巧∨</a></strong>
             <div id="noticeContent" class="notice-content">
-                <strong>1.</strong> 如您使用的是 PassWall、PassWall2 路由插件，订阅编辑的 <strong>用户代理(User-Agent)</strong> 设置为 <strong>PassWall</strong> 即可；<br><br>
+                <strong>1.</strong> 如您使用的是 PassWall、PassWall2 路由插件，订阅编辑的 <strong>用户代理(User-Agent)</strong> 设置为
+                <strong>PassWall</strong> 即可；<br><br>
                 <strong>2.</strong> 如您使用的是 SSR+ 路由插件, 推荐使用 <strong>Base64订阅地址</strong> 进行订阅；<br><br>
                 <strong>3.</strong> 快速切换 <a href='${atob('aHR0cHM6Ly9naXRodWIuY29tL2NtbGl1L1dvcmtlclZsZXNzMnN1Yg==')}'>优选订阅生成器</a>
                 至: sub.google.com, 您可将"?sub=sub.google.com"参数添加到链接末尾, 例如: <br>
@@ -581,10 +553,8 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
         <!--评论系统-->
         <div class="newValine scroll-container" id="vcomments"></div>
         <!--音乐播放器-->
-        <div class="muri">
-            <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
-                id="2568697963"></meting-js>
-        </div>
+        <meting-js fixed="true" autoplay="true" theme="#409EFF" list-folded="true" server="netease" type="playlist"
+            id="2568697963"></meting-js>
     </div>
     <div class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">冀 ICP备2222000777号</a> |
         版权所有 &copy; 2025
@@ -618,8 +588,8 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             qrcodeDiv.innerHTML = '';
             new QRCode(qrcodeDiv, {
                 text: text,
-                width: 160, // 调整宽度
-                height: 160, // 调整高度
+                width: 250, // 调整宽度
+                height: 250, // 调整高度
                 colorDark: "#000000", // 二维码颜色
                 colorLight: "#ffffff", // 背景颜色
                 correctLevel: QRCode.CorrectLevel.Q, // 设置纠错级别
