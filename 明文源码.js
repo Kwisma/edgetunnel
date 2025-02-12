@@ -257,16 +257,6 @@ export default {
 	},
 };
 
-export default {
-    async fetch(request, env, ctx) {
-        return new Response(await imgapi(), {
-            headers: {
-                'Content-Type': 'text/html',
-            },
-        });
-    },
-};
-
 function arrayBufferToBase64(buffer) {
     let binary = ''
     const bytes = new Uint8Array(buffer)
