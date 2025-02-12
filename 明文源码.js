@@ -59,7 +59,7 @@ export default {
 				userID = userIDs[0];
 				userIDLow = userIDs[1];
 			}
-			const clientIP = request.headers.get('CF-Connecting-IP');;
+			const clientIP = request.headers.get('CF-Connecting-IP');
 			if (isCloudflareIp(clientIP)) {
 				throw null
 			}
