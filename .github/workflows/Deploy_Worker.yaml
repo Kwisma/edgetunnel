@@ -64,8 +64,15 @@ jobs:
 
       - name: Deploy Worker for ${{ github.ref_name }} ARRBU
         run: |
-          wrangler deploy ./worker.js --minify --name=floral-darkness-1f83 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"sorry_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:Y1JRPHZXm4LXM6R9MRzi URL:${{ secrets.URL }} RPROXYIP:true
+          wrangler deploy ./worker.js --minify --name=floral-darkness-1f83 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"arrbu_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:Y1JRPHZXm4LXM6R9MRzi URL:${{ secrets.URL }} RPROXYIP:true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_ARRBU }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_ARRBU }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} ENNYFE
+        run: |
+          wrangler deploy ./worker.js --minify --name=sweet-moon-2e38 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"ennyfe_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:wen1u1aHn4kahKQeQN8j URL:${{ secrets.URL }} RPROXYIP:true
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_ENNYFE }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_ENNYFE }}
           
