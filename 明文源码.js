@@ -521,7 +521,7 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
 
 <body>
     <div class="content">
-        <h1>欢迎使用 <a href='https://t.me/Kristi_kysd'>Kristi</a> 公益订阅</h1>
+        <h1>欢迎使用 <a href='https://t.me/Marisa_kristi'>Kristi</a> 公益订阅</h1>
         <!-- 订阅地址和二维码生成 -->
         <div class="txthtml-container scroll-container">
             <p class="divider"></p>
