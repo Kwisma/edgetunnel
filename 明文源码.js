@@ -67,6 +67,13 @@ export default {
 					}
 				});
 			}
+			const response = await fetch(`https://api.ip.sb/geoip/${ip}`);
+			if (response.ok) {
+			    const ipInfo = await response.json();
+			    if (ipInfo.asn == 132892)) {
+				    return new Response('', {status: 522});
+			    }
+			}
 			const currentDate = new Date();
 			currentDate.setHours(0, 0, 0, 0);
 			const timestamp = Math.ceil(currentDate.getTime() / 1000);
@@ -2193,9 +2200,6 @@ async function sendMessage(type, ip, add_data = "") {
 		const response = await fetch(`http://ip-api.com/json/${ip}?lang=zh-CN`);
 		if (response.ok) {
 			const ipInfo = await response.json();
-			if (ipInfo.org.includes('Cloudflare, Inc')) {
-				  return
-			}
 			msg = `${type}\nIP: ${ip}\n国家: ${ipInfo.country}\n<tg-spoiler>城市: ${ipInfo.city}\n组织: ${ipInfo.org}\nASN: ${ipInfo.as}\n${add_data}`;
 		} else {
 			msg = `${type}\nIP: ${ip}\n<tg-spoiler>${add_data}`;
