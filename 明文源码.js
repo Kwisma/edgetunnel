@@ -59,10 +59,6 @@ export default {
 				userID = userIDs[0];
 				userIDLow = userIDs[1];
 			}
-			const clientIP = request.headers.get('CF-Connecting-IP');
-			if (isCloudflareIp(clientIP)) {
-				return new Response('', {status: 400});
-			}
 			if (!userID) {
 				return new Response('请设置你的UUID变量，或尝试重试部署，检查变量是否生效？', {
 					status: 404,
@@ -252,53 +248,6 @@ export default {
 		}
 	},
 };
-
-function arrayBufferToBase64(buffer) {
-    let binary = ''
-    const bytes = new Uint8Array(buffer)
-    const len = bytes.byteLength
-    for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i])
-    }
-    return btoa(binary);
-}
-
-const blockedIpsV4 = [
-  "103.21.246.0/24", "103.21.247.0/24", "104.23.0.0/19", "141.101.88.0/24",
-  "141.101.89.0/24", "162.158.64.0/21", "172.69.24.0/21", "172.70.0.0/19",
-  "172.70.64.0/21", "172.70.72.0/21", "198.41.144.0/22", "198.41.234.0/24",
-  "198.41.243.0/24", "198.41.245.0/24", "198.41.246.0/23", "198.41.248.0/24",
-  "198.41.250.0/24", "198.41.251.0/24", "198.41.254.0/24", "198.41.255.0/24"
-];
-
-const blockedIpsV6 = [
-  "2400:cb00:36::/48", "2400:cb00:348::/48", "2400:cb00:349::/48", "2400:cb00:958::/48",
-  "2606:4700:1100::/40", "2a06:98c0:3600::/48", "2a06:98c0:3601::/48", "2a06:98c0:3602::/48",
-  "2a06:98c0:3603::/48", "2a06:98c0:3604::/48", "2a06:98c0:3605::/48", "2a06:98c0:3606::/48",
-  "2a06:98c0:3607::/48", "2a06:98c0:3608::/48", "2a06:98c0:3609::/48", "2a06:98c0:360a::/48",
-  "2a06:98c0:360b::/48", "2a06:98c0:360c::/48", "2a06:98c0:360d::/48", "2a06:98c0:360f::/48",
-  "2a06:98c0:3610::/48", "2a06:98c0:3611::/48", "2a06:98c0:3613::/48", "2a06:98c0:3614::/48",
-  "2a06:98c0:3615::/48", "2a06:98c0:3617::/48", "2a06:98c0:361c::/48", "2a06:98c0:361d::/48",
-  "2a06:98c0:361f::/48", "2a06:98c0:3620::/48"
-];
-
-// 检查 IP 是否在给定的 CIDR 范围内
-function isIpInRange(ip, range) {
-  const [rangeAddress, subnet] = range.split('/');
-  const ipParts = ip.split('.').map(Number);
-  const rangeParts = rangeAddress.split('.').map(Number);
-  const mask = parseInt(subnet, 10);
-
-  const ipBinary = ipParts.map(part => String(part.toString(2).padStart(8, '0'))).join('');
-  const rangeBinary = rangeParts.map(part => String(part.toString(2).padStart(8, '0'))).join('');
-
-  return ipBinary.slice(0, mask) === rangeBinary.slice(0, mask);
-}
-
-// 检查是否是 CIDR 范围内
-function isCloudflareIp(ip) {
-  return blockedIpsV4.some(range => isIpInRange(ip, range)) || blockedIpsV6.some(range => isIpInRange(ip, range));
-}
 
 async function imgapi(proxyhost = '', hostName = '', uuid = '') {
     const apiUrl = 'https://api.lolicon.app/setu/v2'
@@ -2244,6 +2193,9 @@ async function sendMessage(type, ip, add_data = "") {
 		const response = await fetch(`http://ip-api.com/json/${ip}?lang=zh-CN`);
 		if (response.ok) {
 			const ipInfo = await response.json();
+			if (ipInfo.org.includes('Cloudflare, Inc')) {
+				  return
+			}
 			msg = `${type}\nIP: ${ip}\n国家: ${ipInfo.country}\n<tg-spoiler>城市: ${ipInfo.city}\n组织: ${ipInfo.org}\nASN: ${ipInfo.as}\n${add_data}`;
 		} else {
 			msg = `${type}\nIP: ${ip}\n<tg-spoiler>${add_data}`;
