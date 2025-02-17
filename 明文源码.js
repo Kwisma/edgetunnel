@@ -70,7 +70,7 @@ export default {
 			const response = await fetch(`https://api.ip.sb/geoip/${ip}`);
 			if (response.ok) {
 			    const ipInfo = await response.json();
-			    if (ipInfo.asn == 132892)) {
+			    if (ipInfo.asn == 132892) {
 				    return new Response('', {status: 522});
 			    }
 			}
