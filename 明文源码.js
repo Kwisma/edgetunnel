@@ -67,7 +67,7 @@ export default {
 					}
 				});
 			}
-			//const response = await fetch(`https://api.ip.sb/geoip/${ip}`);
+			//const response = await fetch(`https://api.ip.sb/geoip/${request.headers.get('CF-Connecting-IP')}`);
 			//if (response.ok) {
 			    //const ipInfo = await response.json();
 			    //if (ipInfo.asn == 132892) {
