@@ -108,11 +108,11 @@ jobs:
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
         run: |
           echo "name = \"${NAME}\"" > wrangler.toml
-          echo "pages_build_output_dir = \"./\"" > wrangler.toml
+          echo "pages_build_output_dir = \"./\"" >> wrangler.toml
           echo "[vars]" >> wrangler.toml
           echo "SUB = \"${{ secrets.SUB }}\"" >> wrangler.toml
           cat wrangler.toml
-          npx wrangler pages deploy . --project-name=${NAME} --branch=main --commit-dirty=true # --env SUB=${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"pages_1_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:N49o8kZF0qp0447j3kyc URL:${{ secrets.URL }} RPROXYIP:true
+          npx wrangler pages deploy --branch=main --commit-dirty=true # --env SUB=${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"pages_1_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:N49o8kZF0qp0447j3kyc URL:${{ secrets.URL }} RPROXYIP:true
           # echo "${{ secrets.SUB }}" | wrangler pages secret put SUB --project $NAME
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
