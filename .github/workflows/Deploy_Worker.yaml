@@ -120,7 +120,6 @@ jobs:
           echo "TOKEN=\"N49o8kZF0qp0447j3kyc\"" >> wrangler.toml
           echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
           echo "RPROXYIP=\"true\"" >> wrangler.toml
-          mv wrangler.toml dist/wrangler.toml
           npx wrangler pages deploy --branch=main --commit-dirty=true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
@@ -140,7 +139,6 @@ jobs:
           echo "TOKEN=\"2z2U5XtM39rh2fW84isg\"" >> wrangler.toml
           echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
           echo "RPROXYIP=\"true\"" >> wrangler.toml
-          mv wrangler.toml dist/wrangler.toml
           npx wrangler pages deploy --branch=main --commit-dirty=true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_2 }}
@@ -160,7 +158,6 @@ jobs:
           echo "TOKEN=\"dyRkcYMfQavqC0wMghhv\"" >> wrangler.toml
           echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
           echo "RPROXYIP=\"true\"" >> wrangler.toml
-          mv wrangler.toml dist/wrangler.toml
           npx wrangler pages deploy --branch=main --commit-dirty=true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_3 }}
