@@ -121,9 +121,8 @@ jobs:
           echo "TOKEN=\"N49o8kZF0qp0447j3kyc\"" >> wrangler.toml
           echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
           echo "RPROXYIP=\"true\"" >> wrangler.toml
-          ls -a
-          npm run build
-          npx wrangler pages deploy ./dist --branch=main --commit-dirty=true
+          ls dist
+          npx wrangler pages deploy --no-bundle --branch=main --commit-dirty=true
           # npx wrangler pages deploy ./dist --project-name=g5w2d5g4 --branch=main --commit-dirty=true --binding SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"pages_1_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:N49o8kZF0qp0447j3kyc URL:${{ secrets.URL }} RPROXYIP:true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
