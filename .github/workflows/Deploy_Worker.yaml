@@ -94,7 +94,7 @@ jobs:
           echo "SUBAPI=${{ secrets.SUBAPI }}" >> .env
           echo "SUBCONFIG=${{ secrets.SUBCONFIG }}" >> .env
           echo "SUBNAME=mikuyo_dingyue" >> .env
-          echo "TGID=${{ secrets.TGID }} >> .env
+          echo "TGID=${{ secrets.TGID }}" >> .env
           echo "TGTOKEN=${{ secrets.TGTOKEN }}" >> .env
           echo "TOKEN=N49o8kZF0qp0447j3kyc" >> .env
           echo "URL=${{ secrets.URL }}" >> .env
