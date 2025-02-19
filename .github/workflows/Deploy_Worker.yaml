@@ -5,8 +5,6 @@ on:
     workflows: [Upstream Sync]
     types: [completed]
   push:
-    branches:
-      - main
     tags:
       - "*"
   workflow_dispatch:
@@ -111,7 +109,7 @@ jobs:
         run: |
           echo "name=\"g5w2d5g4\"" > wrangler.toml
           echo "pages_build_output_dir = \".\"" >> wrangler.toml
-          echo "compatibility_date = \"2025-02-20\"" >> wrangler.toml
+          echo "compatibility_date = \"2025-02-19\"" >> wrangler.toml
           echo "[vars]" >> wrangler.toml
           echo "SUB=\"${{ secrets.SUB }}\"" >> wrangler.toml
           echo "SUBAPI=\"${{ secrets.SUBAPI }}\"" >> wrangler.toml
