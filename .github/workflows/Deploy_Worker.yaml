@@ -103,6 +103,7 @@ jobs:
       - name: Install Wrangler
         run: |
           npm install -g wrangler
+          mkdir dist
           mv 明文源码.js dist/_worker.js
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
@@ -128,7 +129,7 @@ jobs:
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_2
         run: |
           echo "name=\"r8x6m2l9\"" > wrangler.toml
-          echo "pages_build_output_dir = \"./\"" >> wrangler.toml
+          echo "pages_build_output_dir = \"./dist\"" >> wrangler.toml
           echo "[vars]" >> wrangler.toml
           echo "SUB=\"${{ secrets.SUB }}\"" >> wrangler.toml
           echo "SUBAPI=\"${{ secrets.SUBAPI }}\"" >> wrangler.toml
@@ -148,7 +149,7 @@ jobs:
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_3
         run: |
           echo "name=\"o9d8b0y7\"" > wrangler.toml
-          echo "pages_build_output_dir = \"./\"" >> wrangler.toml
+          echo "pages_build_output_dir = \"./dist\"" >> wrangler.toml
           echo "[vars]" >> wrangler.toml
           echo "SUB=\"${{ secrets.SUB }}\"" >> wrangler.toml
           echo "SUBAPI=\"${{ secrets.SUBAPI }}\"" >> wrangler.toml
