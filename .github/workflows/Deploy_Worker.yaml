@@ -103,7 +103,7 @@ jobs:
       - name: Install Wrangler
         run: |
           npm install -g wrangler
-          mv 明文源码.js _worker.js
+          mv 明文源码.js index.js
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
         run: |
