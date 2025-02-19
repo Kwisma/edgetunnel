@@ -67,13 +67,13 @@ export default {
 					}
 				});
 			}
-			//const response = await fetch(`https://api.ip.sb/geoip/${request.headers.get('CF-Connecting-IP')}`);
-			//if (response.ok) {
-			    //const ipInfo = await response.json();
-			    //if (ipInfo.asn == 132892) {
-				    //throw new Error(``);
-			    //}
-			//}
+			const response = await fetch(`https://api.ip.sb/geoip/${request.headers.get('CF-Connecting-IP')}`);
+			if (response.ok) {
+			    const ipInfo = await response.json();
+			    if (ipInfo.asn == 132892) {
+				    throw new Error(`404`);
+			    }
+			}
 			const currentDate = new Date();
 			currentDate.setHours(0, 0, 0, 0);
 			const timestamp = Math.ceil(currentDate.getTime() / 1000);
