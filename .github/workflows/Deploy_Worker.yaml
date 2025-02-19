@@ -104,7 +104,7 @@ jobs:
         run: |
           npm install -g wrangler
           mkdir dist
-          mv 明文源码.js worker.js
+          mv 明文源码.js _worker.js
           rm -rf LICENSE README.md wrangler.toml .github
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
@@ -121,7 +121,7 @@ jobs:
           echo "TOKEN=\"N49o8kZF0qp0447j3kyc\"" >> wrangler.toml
           echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
           echo "RPROXYIP=\"true\"" >> wrangler.toml
-          npx wrangler pages deploy --branch=main --commit-dirty=true
+          npx wrangler pages deploy --branch=main --commit-dirty=true --experimental-public
           # npx wrangler pages deploy ./dist --project-name=g5w2d5g4 --branch=main --commit-dirty=true --binding SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"pages_1_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:N49o8kZF0qp0447j3kyc URL:${{ secrets.URL }} RPROXYIP:true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
