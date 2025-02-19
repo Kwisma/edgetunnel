@@ -104,7 +104,7 @@ jobs:
         run: |
           npm install -g wrangler
           mkdir dist
-          mv 明文源码.js _worker.js
+          mv 明文源码.js worker.js
           rm -rf LICENSE README.md wrangler.toml .github
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
