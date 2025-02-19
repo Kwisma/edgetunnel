@@ -107,15 +107,16 @@ jobs:
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
         run: |
-          echo "SUB=${{ secrets.SUB }}" > .env.prod
-          echo "SUBAPI=${{ secrets.SUBAPI }}" >> .env.prod
-          echo "SUBCONFIG=${{ secrets.SUBCONFIG }}" >> .env.prod
-          echo "SUBNAME=mikuyo_dingyue" >> .env.prod
-          echo "TGID=${{ secrets.TGID }}" >> .env.prod
-          echo "TGTOKEN=${{ secrets.TGTOKEN }}" >> .env.prod
-          echo "TOKEN=N49o8kZF0qp0447j3kyc" >> .env.prod
-          echo "URL=${{ secrets.URL }}" >> .env.prod
-          echo "RPROXYIP=true" >> .env.prod
+          echo "SUB=${{ secrets.SUB }}" > .env
+          echo "SUBAPI=${{ secrets.SUBAPI }}" >> .env
+          echo "SUBCONFIG=${{ secrets.SUBCONFIG }}" >> .env
+          echo "SUBNAME=mikuyo_dingyue" >> .env
+          echo "TGID=${{ secrets.TGID }}" >> .env
+          echo "TGTOKEN=${{ secrets.TGTOKEN }}" >> .env
+          echo "TOKEN=N49o8kZF0qp0447j3kyc" >> .env
+          echo "URL=${{ secrets.URL }}" >> .env
+          echo "RPROXYIP=true" >> .env
+          cat .env
           npx wrangler pages deploy . --project-name=g5w2d5g4 --branch=main --commit-dirty=true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
