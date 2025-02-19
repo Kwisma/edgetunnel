@@ -110,7 +110,7 @@ jobs:
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
         run: |
           echo "name=\"g5w2d5g4\"" > wrangler.toml
-          echo "pages_build_output_dir = \"./dist\"" >> wrangler.toml
+          echo "pages_build_output_dir = \"./\"" >> wrangler.toml
           echo "[vars]" >> wrangler.toml
           echo "SUB=\"${{ secrets.SUB }}\"" >> wrangler.toml
           echo "SUBAPI=\"${{ secrets.SUBAPI }}\"" >> wrangler.toml
