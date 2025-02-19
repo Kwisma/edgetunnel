@@ -107,7 +107,7 @@ jobs:
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
         run: |
-          wrangler pages deploy . --project-name=g5w2d5g4 --branch=main
+          wrangler pages deploy . --project-name=g5w2d5g4 --branch=main --commit-dirty=true
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES_1 }}
