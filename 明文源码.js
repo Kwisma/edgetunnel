@@ -512,6 +512,13 @@ async function imgapi(proxyhost = '', hostName = '', uuid = '') {
             </a>
             <div id="qrcode_3" class="qrcode-container"></div>
 
+            <p>loon订阅地址:</p>
+	    <a href="javascript:void(0)"
+                onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?loon','qrcode_4')" class="copy-link">
+		https://${proxyhost}${hostName}/${uuid}?loon
+            </a>
+	    <div id="qrcode_4" class="qrcode-container"></div>
+
             <strong><a href="javascript:void(0);" id="noticeToggle" onclick="toggleNotice()">实用订阅技巧∨</a></strong>
             <div id="noticeContent" class="notice-content">
                 <strong>1.</strong> 如您使用的是 PassWall、PassWall2 路由插件，订阅编辑的 <strong>用户代理(User-Agent)</strong> 设置为
