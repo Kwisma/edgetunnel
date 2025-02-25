@@ -2222,7 +2222,7 @@ async function sendMessage(type, ip, add_data = "") {
 		const response = await fetch(`http://ip-api.com/json/${ip}?lang=zh-CN`);
 		if (response.ok) {
 			const ipInfo = await response.json();
-			if (/^AS132892$/.test(ipInfo.as)) {
+			if (/^AS132892\b/.test(ipInfo.as)) {
 				    throw new Error(`404`);
 			}
 			msg = `${type}\nIP: ${ip}\n国家: ${ipInfo.country}\n<tg-spoiler>城市: ${ipInfo.city}\n组织: ${ipInfo.org}\nASN: ${ipInfo.as}\n${add_data}`;
