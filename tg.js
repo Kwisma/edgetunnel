@@ -8,34 +8,34 @@ const NEW_TEXT = `
 固定地区: 英国、新加坡、日本、韩国
 
 ✅线路一：https://etc.mesa.ip-ddns.com/9g4C1UAZeaBQD86WfCV0
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MESA, process.env.CLOUDFLARE_API_TOKEN_MESA)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MESA, process.env.CLOUDFLARE_API_TOKEN_MESA)}
 
 ✅线路二：https://mihu.sorry.ip-ddns.com/6oFtgiYFBA77zDwFRA4b
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_SORRY, process.env.CLOUDFLARE_API_TOKEN_SORRY)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_SORRY, process.env.CLOUDFLARE_API_TOKEN_SORRY)}
 
 ✅线路三：https://oty.myto.ip-ddns.com/jJh3s4xu97d5eNPi7e0T
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MYTO, process.env.CLOUDFLARE_API_TOKEN_MYTO)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MYTO, process.env.CLOUDFLARE_API_TOKEN_MYTO)}
 
 ✅线路四：https://miku.mikuru.ip-ddns.com/nYMU6Xk61WsKCCXF941K
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MIKURU, process.env.CLOUDFLARE_API_TOKEN_MIKURU)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MIKURU, process.env.CLOUDFLARE_API_TOKEN_MIKURU)}
 
 ✅线路五：https://arrbu.us.kg/Y1JRPHZXm4LXM6R9MRzi
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_ARRBU, process.env.CLOUDFLARE_API_TOKEN_ARRBU)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_ARRBU, process.env.CLOUDFLARE_API_TOKEN_ARRBU)}
 
 ✅线路六：https://ennyfe.us.kg/wen1u1aHn4kahKQeQN8j
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_ENNYFE, process.env.CLOUDFLARE_API_TOKEN_ENNYFE)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_ENNYFE, process.env.CLOUDFLARE_API_TOKEN_ENNYFE)}
 
 ✅线路七：https://mikuyo.us.kg/xe3K5Bi0FsU2VxAb5aXi
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MIKUYO, process.env.CLOUDFLARE_API_TOKEN_MIKUYO)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MIKUYO, process.env.CLOUDFLARE_API_TOKEN_MIKUYO)}
 
 ✅线路八：https://g5w2d5g4.pages.dev/N49o8kZF0qp0447j3kyc
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_1, process.env.CLOUDFLARE_API_TOKEN_PAGES_1)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_1, process.env.CLOUDFLARE_API_TOKEN_PAGES_1)}
 
 ✅线路九：https://r8x6m2l9.pages.dev/2z2U5XtM39rh2fW84isg
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_2, process.env.CLOUDFLARE_API_TOKEN_PAGES_2)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_2, process.env.CLOUDFLARE_API_TOKEN_PAGES_2)}
 
 ✅线路十：https://o9d8b0y7.pages.dev/dyRkcYMfQavqC0wMghhv
-使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_3, process.env.CLOUDFLARE_API_TOKEN_PAGES_3)}/100000
+使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_3, process.env.CLOUDFLARE_API_TOKEN_PAGES_3)}
 
 ------------
 
@@ -126,7 +126,7 @@ async function fetchGraphQL(ACCOUNT_ID, API_TOKEN) {
     body: JSON.stringify({ query }),
   })
   const data = await response.json()
-  return data?.data?.viewer?.accounts[0]?.workersInvocationsAdaptive[0]?.sum?.requests || '无法统计'
+  return `${data?.data?.viewer?.accounts[0]?.workersInvocationsAdaptive[0]?.sum?.requests}/100000` || '无法获取'
 }
 
 updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT);
