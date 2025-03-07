@@ -126,7 +126,7 @@ async function fetchGraphQL(ACCOUNT_ID, API_TOKEN) {
     body: JSON.stringify({ query }),
   })
   const data = await response.json()
-  return data?.data?.viewer?.accounts[0]?.workersInvocationsAdaptive[0]?.sum?.requests
+  return data?.data?.viewer?.accounts[0]?.workersInvocationsAdaptive[0]?.sum?.requests || '无法统计'
 }
 
 updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT);
