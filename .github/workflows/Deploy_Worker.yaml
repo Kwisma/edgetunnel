@@ -5,10 +5,8 @@ on:
     workflows: [Upstream Sync]
     types: [completed]
   push:
-    tags:
-      - "*"
-    branches:
-      - main
+    paths:
+      - '明文源码.js'
   workflow_dispatch:
 
 jobs:
