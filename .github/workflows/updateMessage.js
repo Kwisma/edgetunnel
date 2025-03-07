@@ -1,9 +1,9 @@
 name: updateMessage
 
 on:
-    workflow_dispatch:
-    schedule:
-      - cron: '0 * * * *'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
   obfuscate:
