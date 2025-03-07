@@ -2,7 +2,6 @@ import axios from "axios";
 import fetch from "node-fetch";
 const CHAT_ID = '-1002352563934';
 const MESSAGE_ID = '30';
-console.log('🚀开始发送数据更新请求', process.env.CLOUDFLARE_ACCOUNT_ID,process.env.CLOUDFLARE_ACCOUNT_ID);
 const NEW_TEXT = `
 ✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址 非标！</a>
 
@@ -90,7 +89,7 @@ async function updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT) {
 
     console.log('✅数据更新，已发送', response.data);
   } catch (error) { 
-    console.error('数据未更新，取消发送', error);
+    console.error('数据未更新，取消发送');
   }
 }
 async function fetchGraphQL(ACCOUNT_ID, API_TOKEN) {
