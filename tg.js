@@ -2,6 +2,7 @@ import axios from "axios";
 import fetch from "node-fetch";
 const CHAT_ID = '-1002352563934';
 const MESSAGE_ID = '30';
+console.log('🚀开始发送数据更新请求', process.env.CLOUDFLARE_ACCOUNT_ID,process.env.CLOUDFLARE_ACCOUNT_ID);
 const NEW_TEXT = `
 ✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址 非标！</a>
 
