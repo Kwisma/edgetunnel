@@ -1,7 +1,7 @@
 import axios from "axios";
 import fetch from "node-fetch";
-const CHAT_ID = '-1002352563934';
-const MESSAGE_ID = '30';
+const CHAT_ID = "-1002352563934";
+const MESSAGE_ID = "30";
 const NEW_TEXT = `
 ✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址 非标！</a>
 
@@ -83,21 +83,21 @@ async function updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT) {
         chat_id: CHAT_ID,
         message_id: MESSAGE_ID,
         text: NEW_TEXT,
-        parse_mode: 'HTML' // 可选：支持 Markdown 或 HTML
-      }
+        parse_mode: "HTML", // 可选：支持 Markdown 或 HTML
+      },
     );
 
-    console.log('✅数据更新，已发送', response.data);
-  } catch (error) { 
-    console.error('数据未更新，取消发送');
+    console.log("✅数据更新，已发送", response.data);
+  } catch (error) {
+    console.error("数据未更新，取消发送");
   }
 }
 async function fetchGraphQL(ACCOUNT_ID, API_TOKEN) {
-  const now = new Date()
-  const startOfDay = new Date(now)
-  startOfDay.setUTCHours(0, 0, 0, 0)
-  const endOfDay = new Date(now)
-  endOfDay.setUTCHours(23, 59, 59, 999)
+  const now = new Date();
+  const startOfDay = new Date(now);
+  startOfDay.setUTCHours(0, 0, 0, 0);
+  const endOfDay = new Date(now);
+  endOfDay.setUTCHours(23, 59, 59, 999);
   const query = `query {
     viewer {
       accounts(filter: { accountTag: "${ACCOUNT_ID}" }) {
@@ -114,20 +114,22 @@ async function fetchGraphQL(ACCOUNT_ID, API_TOKEN) {
         }
       }
     }
-  }`
+  }`;
 
   // 发送请求
-  const response = await fetch('https://api.cloudflare.com/client/v4/graphql', {
-    method: 'POST',
+  const response = await fetch("https://api.cloudflare.com/client/v4/graphql", {
+    method: "POST",
     headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
-      'Content-Type': 'application/json',
+      Authorization: `Bearer ${API_TOKEN}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ query }),
-  })
-  const data = await response.json()
-  const quer = data?.data?.viewer?.accounts[0]?.workersInvocationsAdaptive[0]?.sum?.requests
-  return quer ? `${quer}/100000` || '无法获取'
+  });
+  const data = await response.json();
+  const quer =
+    data?.data?.viewer?.accounts[0]?.workersInvocationsAdaptive[0]?.sum
+      ?.requests;
+  return quer ? `${quer}/100000` : "无法获取";
 }
 
 updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT);
