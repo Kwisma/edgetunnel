@@ -89,7 +89,7 @@ async function updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT) {
 
     console.log('✅数据更新，已发送', response.data);
   } catch (error) { 
-    console.error('数据未更新，取消发送');
+    console.error('数据未更新，取消发送', error);
   }
 }
 async function fetchGraphQL(ACCOUNT_ID, API_TOKEN) {
