@@ -5,7 +5,7 @@ const MESSAGE_ID = "30";
 const NEW_TEXT = `
 ✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址 非标！</a>
 
-固定地区: 英国、新加坡、日本、韩国
+固定地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
 
 ✅线路一：https://etc.mesa.ip-ddns.com/9g4C1UAZeaBQD86WfCV0
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MESA, process.env.CLOUDFLARE_API_TOKEN_MESA)}
@@ -56,7 +56,7 @@ proxyip=xxx.xxx.xxx.xxx
 Worker 部署的 Vless/Trojan 可以通过填入环境变量 SUB 快速获取节点订阅信息，内置 ProxyIP
 
 精简版订阅器
-地区: 英国、新加坡、日本、韩国
+地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
 
 Edge项目变量 SUB 填：<code>sub.kristi.majusti.us.kg</code>
 
@@ -64,7 +64,7 @@ Edge项目变量 SUB 填：<code>sub.kristi.majusti.us.kg</code>
 <code>?sub=sub.kristi.majusti.us.kg</code>
 
 测试版订阅器 
-地区: 印度尼西亚、台湾、德国、新加坡、日本、瑞典、美国、英国、荷兰、韩国、香港
+地区: 🇩🇪德国、🇬🇧英国、🇭🇰香港、🇮🇩印度尼西亚、🇯🇵日本、🇰🇷韩国、🇸🇪瑞典、🇸🇬新加坡、🇹🇼台湾、🇺🇸美国
 
 Edge项目变量 SUB 填：<code>subbeta.kristi.majusti.us.kg</code>
 
