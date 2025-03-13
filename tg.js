@@ -58,18 +58,22 @@ Worker 部署的 Vless/Trojan 可以通过填入环境变量 SUB 快速获取节
 精简版订阅器
 地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
 
-Edge项目变量 SUB 填：<code>sub.kristi.majusti.us.kg</code>
+Edge项目变量 SUB 
+填：<code>sub.mot.cloudns.biz</code>
+或：<code>sub.haxtop.ggff.net</code>
 
-或者订阅链接后面加：
-<code>?sub=sub.kristi.majusti.us.kg</code>
+或者订阅链接后面加：<code>?sub=sub.mot.cloudns.biz</code>
+或：<code>?sub=sub.haxtop.ggff.net</code>
 
 测试版订阅器 
 地区: 🇩🇪德国、🇬🇧英国、🇭🇰香港、🇮🇩印度尼西亚、🇯🇵日本、🇰🇷韩国、🇸🇪瑞典、🇸🇬新加坡、🇹🇼台湾、🇺🇸美国
 
-Edge项目变量 SUB 填：<code>subbeta.kristi.majusti.us.kg</code>
+Edge项目变量 SUB 
+填：<code>subbeta.mot.cloudns.biz</code>
+或：<code>subbate.haxtop.ggff.net</code
 
-或者订阅链接后面加：
-<code>?sub=subbeta.kristi.majusti.us.kg</code>
+或者订阅链接后面加：<code>?sub=subbeta.mot.cloudns.biz</code>
+或：<code>?sub=subbate.haxtop.ggff.net</code>
 
 ------------
 
