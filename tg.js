@@ -5,7 +5,7 @@ const MESSAGE_ID = "30";
 const NEW_TEXT = `
 ✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址 非标！</a>
 
-固定地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
+地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
 
 ✅线路一：https://etc.mesa.ip-ddns.com/9g4C1UAZeaBQD86WfCV0
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MESA, process.env.CLOUDFLARE_API_TOKEN_MESA)}
@@ -46,10 +46,7 @@ https://[你的订阅链接]?sub=sub.mot.cloudns.biz
 ------------
 
 也可以通过填入环境变量 SUB 快速获取节点订阅信息，内置 ProxyIP
-
-订阅器
-地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
-
+🌐订阅器
 Edge项目变量 SUB 填：
 <code>sub.mot.cloudns.biz</code>
 或：
