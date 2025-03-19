@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 const CHAT_ID = "-1002352563934";
 const MESSAGE_ID = "30";
 const NEW_TEXT = `
-✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址 非标！</a>
+✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址</a>非标！
 
 地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
 
@@ -36,30 +36,14 @@ const NEW_TEXT = `
 
 ✅线路十：https://o9d8b0y7.pages.dev/dyRkcYMfQavqC0wMghhv
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_3, process.env.CLOUDFLARE_API_TOKEN_PAGES_3)}
-
 ------------
-
-Worker 部署的 Vless 可通过填入 url 路径快速获取节点订阅信息：
-
-https://[你的订阅链接]?sub=sub.mot.cloudns.biz
-
+⚛️<a href="https://t.me/Marisa_kristi/162" title="mihomo">mihomo(clash meta)</a>专用订阅
 ------------
-
-也可以通过填入环境变量 SUB 快速获取节点订阅信息，内置 ProxyIP
 🌐订阅器
-Edge项目变量 SUB 填：
-<code>sub.mot.cloudns.biz</code>
-或：
-<code>sub.haxtop.ggff.net</code>
-
-也可以在订阅链接后面加：
-<code>?sub=sub.mot.cloudns.biz</code>
-或：
-<code>?sub=sub.haxtop.ggff.net</code>
-
-------------
-
-订阅内容 base64、clash、singbox、loon
+Worker 部署的 Vless 可通过填入 url 路径快速获取节点订阅信息：
+https://[你的订阅链接]<code>?sub=sub.mot.cloudns.biz</code>
+也可以通过填入环境变量 SUB 快速获取节点订阅信息，内置 ProxyIP
+SUB = <code>sub.mot.cloudns.biz</code> 或 <code>sub.haxtop.ggff.net</code>
 `;
 async function updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT) {
   try {
