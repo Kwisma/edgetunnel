@@ -39,17 +39,13 @@ const NEW_TEXT = `
 
 ------------
 
-#反代IP #优选IP #永久订阅 #Vless  #订阅器 #节点 #订阅 #白嫖 #公益 #免费节点 #免费订阅 #小火箭节点 #v2ray节点 #Clash节点 #proxyip
-
-------------
-
 Worker 部署的 Vless 可通过填入 url 路径快速获取节点订阅信息：
 
 https://[你的订阅链接]?sub=sub.mot.cloudns.biz
 
 ------------
 
-Worker 部署的 Vless/Trojan 可以通过填入环境变量 SUB 快速获取节点订阅信息，内置 ProxyIP
+也可以通过填入环境变量 SUB 快速获取节点订阅信息，内置 ProxyIP
 
 订阅器
 地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
