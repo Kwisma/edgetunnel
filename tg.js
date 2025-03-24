@@ -42,8 +42,10 @@ const NEW_TEXT = `
 🌐订阅器
 Worker 部署的 Vless 可通过填入 url 路径快速获取节点订阅信息：
 https://[你的订阅链接]<code>?sub=sub.mot.cloudns.biz</code>
-也可以通过填入环境变量 SUB 快速获取节点订阅信息，内置 ProxyIP
+精简版：
 SUB = <code>sub.mot.cloudns.biz</code> 或 <code>sub.haxtop.ggff.net</code>
+beta版：
+SUB = <code>subbeta.mot.cloudns.biz</code> 或 <code>subbeta.haxtop.ggff.net</code>
 `;
 async function updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT) {
   try {
