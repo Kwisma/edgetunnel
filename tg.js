@@ -1,7 +1,7 @@
 import axios from "axios";
 import fetch from "node-fetch";
-const CHAT_ID = "-1002352563934";
-const MESSAGE_ID = "30";
+const CHAT_ID = "-1002493215136";
+const MESSAGE_ID = "91";
 const NEW_TEXT = `
 ✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址</a>非标！
 
