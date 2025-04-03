@@ -28,13 +28,13 @@ const NEW_TEXT = `
 ✅线路七：https://mikuyo.bpd67081tsq.ddns-ip.net/xe3K5Bi0FsU2VxAb5aXi
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MIKUYO, process.env.CLOUDFLARE_API_TOKEN_MIKUYO)}
 
-✅线路八：https://g5w2d5g4.pages.dev/N49o8kZF0qp0447j3kyc
+✅线路八：https://mot.gike.dpdns.org/N49o8kZF0qp0447j3kyc
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_1, process.env.CLOUDFLARE_API_TOKEN_PAGES_1)}
 
-✅线路九：https://r8x6m2l9.pages.dev/2z2U5XtM39rh2fW84isg
+✅线路九：https://mot.majusti.dpdns.org/2z2U5XtM39rh2fW84isg
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_2, process.env.CLOUDFLARE_API_TOKEN_PAGES_2)}
 
-✅线路十：https://o9d8b0y7.pages.dev/dyRkcYMfQavqC0wMghhv
+✅线路十：https://mot.luyuju.dpdns.org/dyRkcYMfQavqC0wMghhv
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_3, process.env.CLOUDFLARE_API_TOKEN_PAGES_3)}
 ------------
 ⚛️<a href="https://t.me/Marisa_kristi/162" title="mihomo">mihomo(clash meta)</a>专用订阅
