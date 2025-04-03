@@ -84,83 +84,23 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MIKUYO }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MIKUYO }}
 
-  deploy-pages:
-    name: Deploy Cloudflare Pages
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install Wrangler
-        run: |
-          npm install -g wrangler
-          mkdir dist
-          mv 明文源码.js _worker.js
-          rm -rf LICENSE README.md wrangler.toml .github
-
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
         run: |
-          echo "name=\"g5w2d5g4\"" > wrangler.toml
-          echo "pages_build_output_dir = \".\"" >> wrangler.toml
-          echo "compatibility_date = \"2025-02-19\"" >> wrangler.toml
-          echo "[vars]" >> wrangler.toml
-          echo "SUB=\"${{ secrets.SUB }}\"" >> wrangler.toml
-          echo "SUBAPI=\"${{ secrets.SUBAPI }}\"" >> wrangler.toml
-          echo "SUBCONFIG=\"${{ secrets.SUBCONFIG }}\"" >> wrangler.toml
-          echo "SUBNAME=\"pages_1_dingyue\"" >> wrangler.toml
-          echo "TGID=\"${{ secrets.TGID }}\"" >> wrangler.toml
-          echo "TGTOKEN=\"${{ secrets.TGTOKEN }}\"" >> wrangler.toml
-          echo "TOKEN=\"N49o8kZF0qp0447j3kyc\"" >> wrangler.toml
-          echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
-          echo "PROXYIP=\"${{ secrets.PROXYIP }}\"" >> wrangler.toml
-          npx wrangler pages deploy --branch=main --commit-dirty=true
+          npx wrangler deploy ./worker.js --minify --name=billowing-rice-7e50 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"kristi1_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:N49o8kZF0qp0447j3kyc URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES_1 }}
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_2
         run: |
-          echo "name=\"r8x6m2l9\"" > wrangler.toml
-          echo "pages_build_output_dir = \".\"" >> wrangler.toml
-          echo "compatibility_date = \"2025-02-19\"" >> wrangler.toml
-          echo "[vars]" >> wrangler.toml
-          echo "SUB=\"${{ secrets.SUB }}\"" >> wrangler.toml
-          echo "SUBAPI=\"${{ secrets.SUBAPI }}\"" >> wrangler.toml
-          echo "SUBCONFIG=\"${{ secrets.SUBCONFIG }}\"" >> wrangler.toml
-          echo "SUBNAME=\"pages_2_dingyue\"" >> wrangler.toml
-          echo "TGID=\"${{ secrets.TGID }}\"" >> wrangler.toml
-          echo "TGTOKEN=\"${{ secrets.TGTOKEN }}\"" >> wrangler.toml
-          echo "TOKEN=\"2z2U5XtM39rh2fW84isg\"" >> wrangler.toml
-          echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
-          echo "PROXYIP=\"${{ secrets.PROXYIP }}\"" >> wrangler.toml
-          npx wrangler pages deploy --branch=main --commit-dirty=true
+          npx wrangler deploy ./worker.js --minify --name=hidden-mouse-a31b --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"kristi2_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:2z2U5XtM39rh2fW84isg URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_2 }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES_2 }}
 
       - name: Deploy Worker for ${{ github.ref_name }} PAGES_3
         run: |
-          echo "name=\"o9d8b0y7\"" > wrangler.toml
-          echo "pages_build_output_dir = \".\"" >> wrangler.toml
-          echo "compatibility_date = \"2025-02-19\"" >> wrangler.toml
-          echo "[vars]" >> wrangler.toml
-          echo "SUB=\"${{ secrets.SUB }}\"" >> wrangler.toml
-          echo "SUBAPI=\"${{ secrets.SUBAPI }}\"" >> wrangler.toml
-          echo "SUBCONFIG=\"${{ secrets.SUBCONFIG }}\"" >> wrangler.toml
-          echo "SUBNAME=\"pages_3_dingyue\"" >> wrangler.toml
-          echo "TGID=\"${{ secrets.TGID }}\"" >> wrangler.toml
-          echo "TGTOKEN=\"${{ secrets.TGTOKEN }}\"" >> wrangler.toml
-          echo "TOKEN=\"dyRkcYMfQavqC0wMghhv\"" >> wrangler.toml
-          echo "URL=\"${{ secrets.URL }}\"" >> wrangler.toml
-          echo "PROXYIP=\"${{ secrets.PROXYIP }}\"" >> wrangler.toml
-          npx wrangler pages deploy --branch=main --commit-dirty=true
+          npx wrangler deploy ./worker.js --minify --name=lively-paper-33e0 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"kristi3_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:dyRkcYMfQavqC0wMghhv URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_3 }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES_3 }}
