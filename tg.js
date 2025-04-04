@@ -19,7 +19,7 @@ const NEW_TEXT = `
 ✅线路四：https://miku.mikuru.ip-ddns.com/nYMU6Xk61WsKCCXF941K
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MIKURU, process.env.CLOUDFLARE_API_TOKEN_MIKURU)}
 
-✅线路五：https://arrbu.zs0mpg07dtj.ddns-ip.net/Y1JRPHZXm4LXM6R9MRzi
+✅线路五：https://mot.morisi.ggff.net/Y1JRPHZXm4LXM6R9MRzi
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_ARRBU, process.env.CLOUDFLARE_API_TOKEN_ARRBU)}
 
 ✅线路六：https://ennyfe.zipgd3vx91o.ddns-ip.net/wen1u1aHn4kahKQeQN8j
