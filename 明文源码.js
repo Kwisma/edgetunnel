@@ -742,7 +742,7 @@ async function handleTCPOutBound(remoteSocket, addressType, addressRemote, portR
 				
 			} else if (proxyIP.includes(']:')) {
 				portRemote = proxyIP.split(']:')[1] || portRemote;
-				proxyIP = proxyIP.split(']:')[0] || proxyIP;
+				proxyIP = proxyIP.split(']:')[0] + "]" || proxyIP;
 			} else if (proxyIP.split(':').length === 2) {
 				portRemote = proxyIP.split(':')[1] || portRemote;
 				proxyIP = proxyIP.split(':')[0] || proxyIP;
