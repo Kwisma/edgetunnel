@@ -5,7 +5,7 @@ const MESSAGE_ID = "30";
 const NEW_TEXT = `
 ✳️<a href="https://t.me/Marisa_kristi/30" title="获取最新订阅">Vless 快速体验订阅地址</a>非标！
 
-地区: 🇬🇧英国、🇸🇬新加坡、🇯🇵日本、🇰🇷韩国
+地区: 🇬🇧英国、🇭🇰香港、🇯🇵日本、🇰🇷韩国、🇸🇬新加坡、🇺🇸美国
 
 ✅线路一：https://etc.mesa.ip-ddns.com/9g4C1UAZeaBQD86WfCV0
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_MESA, process.env.CLOUDFLARE_API_TOKEN_MESA)}
