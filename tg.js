@@ -49,7 +49,7 @@ SUB = <code>subbeta.mot.cloudns.biz</code> 或 <code>subbeta.haxtop.ggff.net</co
 `;
 async function updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT) {
   try {
-    const response = await axios.post(
+    let response = await axios.post(
       `https://api.telegram.org/bot${process.env.BOT_TOKEN}/editMessageText`,
       {
         chat_id: CHAT_ID,
@@ -58,12 +58,20 @@ async function updateMessage(CHAT_ID, MESSAGE_ID, NEW_TEXT) {
         parse_mode: "HTML", // 可选：支持 Markdown 或 HTML
       },
     );
-
-    console.log("✅数据更新，已发送", response.data);
+    response = await axios.post(
+      `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
+      {
+        chat_id: CHAT_ID,
+        text: NEW_TEXT,
+        parse_mode: "HTML", // 可选：支持 Markdown 或 HTML
+      }
+    );
+    console.log("✅数据更新，已发送");
   } catch (error) {
     console.error("数据未更新，取消发送", error.message);
   }
 }
+
 async function fetchGraphQL(ACCOUNT_ID, API_TOKEN) {
   const now = new Date();
   const startOfDay = new Date(now);
