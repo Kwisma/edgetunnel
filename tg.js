@@ -37,7 +37,7 @@ const NEW_TEXT = `
 ✅线路十：https://mot.luyuju.dpdns.org/dyRkcYMfQavqC0wMghhv
 使用情况：${await fetchGraphQL(process.env.CLOUDFLARE_ACCOUNT_ID_PAGES_3, process.env.CLOUDFLARE_API_TOKEN_PAGES_3)}
 ------------
-⚛️<a href="https://t.me/Marisa_kristi/162" title="mihomo">mihomo(clash meta)</a>专用订阅
+⚛️<a href="https://t.me/Marisa_kristi/616" title="mihomo">mihomo(clash meta)</a>专用订阅
 ------------
 🌐订阅器
 Worker 部署的 Vless 可通过填入 url 路径快速获取节点订阅信息：
