@@ -1,0 +1,106 @@
+name: Deploy Worker 
+
+on:
+  workflow_run:
+    workflows: [Upstream Sync]
+    types: [completed]
+  push:
+    paths:
+      - '明文源码.js'
+  workflow_dispatch:
+
+jobs:
+  deploy-workers:
+    name: Deploy Cloudflare Workers
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Wrangler
+        run: |
+          npm install -g wrangler
+          mv 明文源码.js worker.js
+      - name: Deploy Worker for ${{ github.ref_name }} 
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=square-snowflake-e53e --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"zijian_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:${{ secrets.TOKEN }} URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} MIKURU
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=muddy-firefly-4af6 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"miku_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:nYMU6Xk61WsKCCXF941K URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MIKURU }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MIKURU }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} MESA
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=late-firefly-104f --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"mesa_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:9g4C1UAZeaBQD86WfCV0 URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MESA }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MESA }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} MYTO
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=shy-lab-09b8 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"myto_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:jJh3s4xu97d5eNPi7e0T URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MYTO }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MYTO }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} SORRY
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=raspy-night-e359 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"sorry_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:6oFtgiYFBA77zDwFRA4b URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_SORRY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_SORRY }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} ARRBU
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=floral-darkness-1f83 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"arrbu_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:Y1JRPHZXm4LXM6R9MRzi URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_ARRBU }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_ARRBU }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} ENNYFE
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=sweet-moon-2e38 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"ennyfe_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:wen1u1aHn4kahKQeQN8j URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_ENNYFE }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_ENNYFE }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} MIKUYO
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=white-tooth-a389 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"mikuyo_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:xe3K5Bi0FsU2VxAb5aXi URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_MIKUYO }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_MIKUYO }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} PAGES_1
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=billowing-rice-7e50 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"kristi1_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:N49o8kZF0qp0447j3kyc URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_1 }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES_1 }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} PAGES_2
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=hidden-mouse-a31b --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"kristi2_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:2z2U5XtM39rh2fW84isg URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_2 }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES_2 }}
+
+      - name: Deploy Worker for ${{ github.ref_name }} PAGES_3
+        run: |
+          npx wrangler deploy ./worker.js --minify --name=lively-paper-33e0 --compatibility-date=${{ secrets.DATE }} --var SUB:${{ secrets.SUB }} SUBAPI:${{ secrets.SUBAPI }} SUBCONFIG:${{ secrets.SUBCONFIG }} SUBNAME:"kristi3_dingyue" TGID:${{ secrets.TGID }} TGTOKEN:${{ secrets.TGTOKEN }} TOKEN:dyRkcYMfQavqC0wMghhv URL:${{ secrets.URL }} PROXYIP:${{ secrets.PROXYIP }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PAGES_3 }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES_3 }}
