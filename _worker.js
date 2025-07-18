@@ -1,4 +1,4 @@
-
+import { jwtVerify } from "jose";
 import { connect } from 'cloudflare:sockets';
 
 let userID = '';
