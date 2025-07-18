@@ -49,6 +49,7 @@ let link = [];
 let banHosts = [atob('c3BlZWQuY2xvdWRmbGFyZS5jb20=')];
 let SCV = 'true';
 let allowInsecure = '&allowInsecure=1';
+let jwt = "4_qo:GHNKj~V-jv^9)}e";
 export default {
     async fetch(request, env, ctx) {
         try {
@@ -156,6 +157,11 @@ export default {
                 if (!SCV || SCV == '0' || SCV == 'false') allowInsecure = '';
                 else SCV = 'true';
                 const 路径 = url.pathname.toLowerCase();
+                const authResult = await verifyJWT(request, env.JWT || jwt);
+                // 如果返回的是 Response 对象，说明验证失败，直接返回
+                if (authResult instanceof Response) {
+                    return authResult;
+                }
                 if (路径 == '/') {
                     if (env.URL302) return Response.redirect(env.URL302, 302);
                     else if (env.URL) return await 代理URL(env.URL, url);
@@ -4168,5 +4174,40 @@ async function getUsage(accountId, email, apikey, all = 100000) {
         console.error('获取使用量时发生错误:', error.message);
         // 发生错误时返回默认值
         return [all, 0, 0, 0];
+    }
+}
+
+async function verifyJWT(request, jwttoken) {
+    try {
+        const authHeader = request.headers.get("Authorization");
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return new Response("Unauthorized", {
+                status: 401,
+            });
+        }
+
+        const token = authHeader.split(" ")[1];
+        const secret = new TextEncoder().encode(jwttoken);
+
+        const { payload } = await jwtVerify(token, secret, {
+            issuer: "Marisa_kristi",
+            audience: "Marisa_X",
+            algorithms: ["HS256"],
+            clockTolerance: 15,
+        });
+
+        if (payload.role !== "admin") {
+            return new Response("Insufficient privileges", { status: 403 });
+        }
+
+        // 验证成功，返回 payload
+        return { success: true, payload };
+    } catch (err) {
+        if (err.code === "ERR_JWT_EXPIRED") {
+            return new Response("Token expired", { status: 401 });
+        } else if (err.code === "ERR_JWT_INVALID") {
+            return new Response("Invalid token", { status: 401 });
+        }
+        return new Response("Unauthorized", { status: 401 });
     }
 }
