@@ -1,4 +1,4 @@
-
+import { jwtVerify } from "jose";
 import { connect } from 'cloudflare:sockets';
 
 let userID = '';
@@ -165,7 +165,13 @@ export default {
                             'Content-Type': 'text/html; charset=UTF-8',
                         },
                     });
-                } else if (路径 == `/${fakeUserID}`) {
+                }
+                const authResult = await verifyJWT(request, env.JWT || jwt);
+                // 如果返回的是 Response 对象，说明验证失败，直接返回
+                if (authResult instanceof Response) {
+                    return authResult;
+                }
+                if (路径 == `/${fakeUserID}`) {
                     const fakeConfig = await 生成配置信息(userID, request.headers.get('Host'), sub, 'CF-Workers-SUB', RproxyIP, url, fakeUserID, fakeHostName, env);
                     return new Response(`${fakeConfig}`, { status: 200 });
                 } else if (url.pathname == `/${动态UUID}/edit` || 路径 == `/${userID}/edit`) {
@@ -4219,4 +4225,38 @@ async function nginx() {
 	</html>
 	`
     return text;
+}
+async function verifyJWT(request, jwttoken) {
+    try {
+        const authHeader = request.headers.get("Authorization");
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return new Response("Unauthorized", {
+                status: 401,
+            });
+        }
+
+        const token = authHeader.split(" ")[1];
+        const secret = new TextEncoder().encode(jwttoken);
+
+        const { payload } = await jwtVerify(token, secret, {
+            issuer: "Marisa_kristi",
+            audience: "Marisa_X",
+            algorithms: ["HS256"],
+            clockTolerance: 15,
+        });
+
+        if (payload.role !== "admin") {
+            return new Response("Insufficient privileges", { status: 403 });
+        }
+
+        // 验证成功，返回 payload
+        return { success: true, payload };
+    } catch (err) {
+        if (err.code === "ERR_JWT_EXPIRED") {
+            return new Response("Token expired", { status: 401 });
+        } else if (err.code === "ERR_JWT_INVALID") {
+            return new Response("Invalid token", { status: 401 });
+        }
+        return new Response("Unauthorized", { status: 401 });
+    }
 }
