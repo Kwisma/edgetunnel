@@ -1723,7 +1723,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             } else {
 		if (_url.searchParams.has('b64') || _url.searchParams.has('base64')) UA = 'v2ray';
 		if (_url.searchParams.has('clash')) UA = 'clash.meta';
-		if (_url.searchParams.has('singbox') || _url.searchParams.has('sb') UA = 'singbox';
+		if (_url.searchParams.has('singbox') || _url.searchParams.has('sb')) UA = 'singbox';
                 const response = await fetch(url, {
                     headers: {
                         'User-Agent': UA + atob('IENGLVdvcmtlcnMtZWRnZXR1bm5lbC9jbWxpdQ==')
