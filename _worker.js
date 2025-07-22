@@ -1721,6 +1721,9 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             if ((!sub || sub == "") && isBase64 == true) {
                 content = await 生成本地订阅(fakeHostName, fakeUserID, noTLS, newAddressesapi, newAddressescsv, newAddressesnotlsapi, newAddressesnotlscsv);
             } else {
+		if (_url.searchParams.has('b64') || _url.searchParams.has('base64')) UA = 'v2ray';
+		if (_url.searchParams.has('clash')) UA = 'clash.meta';
+		if (_url.searchParams.has('singbox') || _url.searchParams.has('sb') UA = 'singbox';
                 const response = await fetch(url, {
                     headers: {
                         'User-Agent': UA + atob('IENGLVdvcmtlcnMtZWRnZXR1bm5lbC9jbWxpdQ==')
