@@ -267,6 +267,7 @@ export default {
 
                 return await 维列斯OverWSHandler(request);
             }
+	    return new Response(null, { status: 404 });
         } catch (err) {
             let e = err;
             return new Response(e.toString());
