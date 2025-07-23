@@ -1726,7 +1726,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
 		if (_url.searchParams.has('singbox') || _url.searchParams.has('sb')) UA = 'singbox';
                 const response = await fetch(url, {
                     headers: {
-                        'User-Agent': UA + atob('IENGLVdvcmtlcnMtZWRnZXR1bm5lbC9jbWxpdQ==')
+                        'User-Agent': (isBase64 ? 'v2rayN' : UA) + atob('IENGLVdvcmtlcnMtZWRnZXR1bm5lbC9jbWxpdQ==')
                     }
                 });
                 content = await response.text();
