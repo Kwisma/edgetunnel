@@ -222,7 +222,7 @@ export default {
                     else if (env.URL) return await 代理URL(env.URL, url);
                     else return new Response('不用怀疑！你UUID就是错的！！！', { status: 404 });
                 }
-            } else {
+            } else if (upgradeHeader === 'websocket') {
                 socks5Address = url.searchParams.get('socks5') || socks5Address;
                 if (new RegExp('/socks5=', 'i').test(url.pathname)) socks5Address = url.pathname.split('5=')[1];
                 else if (new RegExp('/socks://', 'i').test(url.pathname) || new RegExp('/socks5://', 'i').test(url.pathname) || new RegExp('/http://', 'i').test(url.pathname)) {
@@ -1721,9 +1721,6 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             if ((!sub || sub == "") && isBase64 == true) {
                 content = await 生成本地订阅(fakeHostName, fakeUserID, noTLS, newAddressesapi, newAddressescsv, newAddressesnotlsapi, newAddressesnotlscsv);
             } else {
-		if (_url.searchParams.has('b64') || _url.searchParams.has('base64')) UA = 'v2ray';
-		if (_url.searchParams.has('clash')) UA = 'clash.meta';
-		if (_url.searchParams.has('singbox') || _url.searchParams.has('sb')) UA = 'singbox';
                 const response = await fetch(url, {
                     headers: {
                         'User-Agent': (isBase64 ? 'v2rayN' : UA) + atob('IENGLVdvcmtlcnMtZWRnZXR1bm5lbC9jbWxpdQ==')
