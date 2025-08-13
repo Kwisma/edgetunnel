@@ -37,7 +37,6 @@ jobs:
         if: steps.sync.outcome == 'failure'
         run: |
           echo "[Info] 上游同步冲突，自动采用上游版本解决..."
-          git remote add upstream https://github.com/cmliu/edgetunnel.git
           git fetch upstream main
           git merge upstream/main -X theirs --allow-unrelated-histories || true
           git push origin main
