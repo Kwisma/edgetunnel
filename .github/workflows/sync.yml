@@ -37,10 +37,23 @@ jobs:
         if: steps.sync.outcome == 'failure'
         run: |
           echo "[Info] 上游同步冲突，自动采用上游版本解决..."
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote get-url upstream >/dev/null 2>&1 || git remote add upstream https://github.com/cmliu/edgetunnel.git
           git fetch upstream main
-          git merge upstream/main -X theirs --allow-unrelated-histories || true
-          git push origin main
-          echo "[Success] 已用上游版本解决冲突并推送"
+          conflict_files=$(git diff --name-only --diff-filter=U || true)
+          if [ -n "$conflict_files" ]; then
+            echo "[Info] 检测到冲突文件，使用上游版本覆盖..."
+            for file in $conflict_files; do
+              git checkout --theirs -- "$file"
+            done
+            git add .
+            git commit -m "Resolve merge conflicts using upstream version" || echo "No changes to commit"
+            git push origin main
+          else
+            echo "[Info] 无冲突文件，跳过自动解决"
+          fi
+          echo "[Success] 冲突已用上游版本解决并推送"
 
       - name: Sync check
         if: failure()
