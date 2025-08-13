@@ -32,9 +32,18 @@ jobs:
           # Set test_mode true to run tests instead of the true action!!
           test_mode: false
 
+      - name: Resolve conflicts using upstream changes
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "[Info] 上游同步冲突，自动采用上游版本解决..."
+          git remote add upstream https://github.com/cmliu/edgetunnel.git
+          git fetch upstream main
+          git merge upstream/main -X theirs --allow-unrelated-histories || true
+          git push origin main
+          echo "[Success] 已用上游版本解决冲突并推送"
+
       - name: Sync check
         if: failure()
         run: |
-          echo "[Error] 由于上游仓库的 workflow 文件变更，导致 GitHub 自动暂停了本次自动更新，你需要手动 Sync Fork 一次，详细教程请查看项目README.md "
-          echo "[Error] Due to a change in the workflow file of the upstream repository, GitHub has automatically suspended the scheduled automatic update. You need to manually sync your fork. Please refer to the project README.md for instructions. "
+          echo "[Error] 冲突自动解决失败，请手动 Sync Fork"
           exit 1
