@@ -272,7 +272,7 @@
 ### 💖 赞助支持 - 提供云服务器维持[订阅转换服务](https://sub.cmliussss.net/)
 - [NodeLoc](https://www.nodeloc.com/)
 - [Alice](https://url.cmliussss.com/alice)
-- [ZMTO(VTEXS)](https://zmto.com/?affid=1532)
+
 ### 🛠 开源代码引用
 - [zizifn/edgetunnel](https://github.com/zizifn/edgetunnel)
 - [3Kmfi6HP/EDtunnel](https://github.com/6Kmfi6HP/EDtunnel)
